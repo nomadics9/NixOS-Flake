@@ -54,6 +54,8 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.flatpak.enable = true;
+  
+
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -152,6 +154,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
 
+
+  #Bleder override to cuda
   nixpkgs.config.packageOverrides = self : rec {
     blender = self.blender.override {
       cudaSupport = true;
