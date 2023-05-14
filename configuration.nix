@@ -43,8 +43,10 @@
     LC_TELEPHONE = "en_GB.UTF-8";
     LC_TIME = "en_GB.UTF-8";
   };
+  
   #CUDA
-  services.xmr-stak.cudaSupport = true;
+  #services.xmr-stak.cudaSupport = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   
