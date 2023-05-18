@@ -11,6 +11,12 @@
       ./hardware-configuration.nix
     ];
 
+  #fonts
+    fonts.fonts = with pkgs; [
+     (nerdfonts.override { fonts = [ "FiraCode" "Anonymice Pro" ]; })
+     ];
+
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -32,6 +38,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
+
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_GB.UTF-8";
     LC_IDENTIFICATION = "en_GB.UTF-8";
@@ -44,17 +51,64 @@
     LC_TIME = "en_GB.UTF-8";
   };
   
-  #CUDA
-  #services.xmr-stak.cudaSupport = true;
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  
+  #services.xserver.enable = true;
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.flatpak.enable = true;
+  #services.xserver.displayManager.gdm.enable = true;
+  #services.xserver.displayManager.gdm.wayland = true;
+
+
+
+  # Enable sddm+Hyprland + Sway + Nvidia Patch
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.settings = {
+      Autologin = {
+    Session = "Hyprland";
+    User = "sager";
+  };
+
+    }
+
+  #programs.hyprland.enable = true;     #enabled in flake.nix
+  #programs.hyprland.nvidiaPatches = true;
+
+  # Sway + stuff
+  programs.sway.enabl = true;
+  programs.sway.extraOptions = "--unsupported-gpu";
+  programs.sway.extraPackages = with pkgs;
+  [
+  swaylock-effects swayidle wlogout   #Login etc..  
+  waybar                              #topbar 
+  kanshi                              #laptop dncies
+  rofi hyprpaper dunst                #home
+  jellyfin-ffmpeg                     #video recorder
+  viewnior                            #image viewr
+  pavucontrol                         #Volume control
+  thunar                              #filemanager
+  thunar-archive-plugin
+  starship                            #topbar dncies
+  wl-clipboard
+  wf-recorder
+  grimshot                 
+  ffmpegthumbnailer                   #thumbnailer
+  tumbler                             #thumbnailer service
+  playerctl                           #play,pause..
+  pamixer                             #mixer
+
+  nordic-theme
+  papirus-icon-theme
+  brightnessctl
+  hyprpicker
+
+  ];
   
+
+
+
+#GnomeOFF
+  #services.xserver.desktopManager.gnome.enable = true;
+  services.flatpak.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -101,16 +155,18 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
-
-
+  
+  #Nvidia
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
-
+  #Cuda
+  services.xmr-stak.cudaSupport = true;
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   hardware.nvidia.modesetting.enable = true;
+
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -156,9 +212,9 @@
 
 
   #Bleder override to cuda
-  nixpkgs.config.packageOverrides = self : rec {
-    blender = self.blender.override {
-      cudaSupport = true;
-    };
-  };
+  #nixpkgs.config.packageOverrides = self : rec {
+  #  blender = self.blender.override {
+  #    cudaSupport = true;
+  #  };
+  #};
 }
