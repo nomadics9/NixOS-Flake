@@ -179,6 +179,8 @@
      neofetch
      gh
      python2
+     dbus
+     upower
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
