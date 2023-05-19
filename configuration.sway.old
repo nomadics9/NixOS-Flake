@@ -55,22 +55,14 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
   # Enable Gnome login
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
 
-  # Gnome environment
-  #services.xserver.desktopManager.gnome.enable = true;
-  
-  #Flatpak
-  services.flatpak.enable = true;
-
   # Enable Xwayland
   programs.xwayland.enable = true;
 
-
-#  Enable sddm+Hyprland + Sway + Nvidia Patch
+  # Enable sddm+Hyprland + Sway + Nvidia Patch
 #  services.xserver.displayManager.sddm.enable = true;
 #  services.xserver.displayManager.sddm.settings = {
 #      Autologin = {
@@ -78,12 +70,55 @@
 #    User = "sager";
 #  };
 #};
-#services.xserver.displayManager.defaultSession = "hyprland";
+  
+# services.xserver.displayManager.defaultSession = "hyprland";
 
     
 
-#  programs.hyprland.enable = true;             #enabled in flake.nix
-#  programs.hyprland.nvidiaPatches = true;      #enabled in flake.nix
+  #programs.hyprland.enable = true;             #enabled in flake.nix
+  #programs.hyprland.nvidiaPatches = true;      #enabled in flake.nix
+
+  # Sway + stuff
+    programs.sway = {
+    enable = true;
+    #xextraOptions = ["--unsupported-gpu"];
+    wrapperFeatures.gtk = true; # so that gtk works properly
+   extraPackages = with pkgs; [
+        swaylock-effects swayidle wlogout   #Login etc..  
+        waybar                              #topbar 
+        kanshi                              #laptop dncies
+        rofi hyprpaper dunst                #home
+        jellyfin-ffmpeg                     #video recorder
+        viewnior                            #image viewr
+   	pavucontrol                        #Volume control
+   	xfce.thunar gnome.nautilus           #filemanager
+   	xfce.thunar-archive-plugin
+   	starship                           #topbar dncies
+   	wl-clipboard
+   	wf-recorder
+   	sway-contrib.grimshot                 
+   	ffmpegthumbnailer                   #thumbnailer
+   	xfce.tumbler                        #thumbnailer service
+   	playerctl                           #play,pause..
+   	pamixer                             #mixer
+   	nordic
+   	papirus-icon-theme
+   	brightnessctl       
+    ];
+        extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+   
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export MOZ_ENABLE_WAYLAND=1
+    '';
+  };
+
+
+#GnomeOFF
+  #services.xserver.desktopManager.gnome.enable = true;
+  services.flatpak.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -112,7 +147,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sager = {
@@ -121,45 +156,23 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
      google-chrome
-     discord
-     swaylock-effects swayidle wlogout     #Login etc..  
-     waybar                                #topbar 
-     kanshi                                #laptop dncies
-     rofi hyprpaper dunst                  #home
-     jellyfin-ffmpeg                       #video recorder
-     viewnior                              #image viewr
-   	 pavucontrol                           #Volume control
-   	 xfce.thunar #gnome.nautilus           #filemanager
-   	 xfce.thunar-archive-plugin
-   	 starship                              #topbar dncies
-   	 wl-clipboard
-   	 wf-recorder
-   	 sway-contrib.grimshot                 
-   	 ffmpegthumbnailer                     #thumbnailer
-   	 xfce.tumbler                          #thumbnailer service
-   	 playerctl                             #play,pause..
-   	 pamixer                               #mixer
-   	 nordic
-   	 papirus-icon-theme
-   	 brightnessctl
-     wlroots
+     discord  
+    #  firefox      	
+    #  thunderbird
     ];
   };
-
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
+  
   #Nvidia
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
-  
   #Cuda
   services.xmr-stak.cudaSupport = true;
-  
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   hardware.nvidia.modesetting.enable = true;
 
@@ -179,6 +192,7 @@
      neofetch
      gh
      python2
+     wlroots
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
