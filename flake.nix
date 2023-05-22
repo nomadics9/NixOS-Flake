@@ -18,15 +18,20 @@
         lib = nixpkgs.lib;
     in {
         nixosConfigurations = {
-          sager = lib.nixosSystem {
+          sager = nixpkgs.lib.nixosSystem {
               inherit system;
               modules = [ ./configuration.nix 
               hyprland.nixosModules.default
               {programs.hyprland.enable = true;
-               programs.hyprland.nvidiaPatches = true;}
-              ];
+              programs.hyprland.nvidiaPatches=true;
+              programs.hyprland.xwayland.enable=true;}];
             };
           };
       };
   }
+
+#nixos-22.11
+
+
+
 

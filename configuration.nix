@@ -2,37 +2,33 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
-
-
+{ config, pkgs, lib, inputs, ... }:
 {
   # Include the results of the hardware scan.
-    imports =[ ./hardware-configuration.nix];
-
-
+    imports = [ ./hardware-configuration.nix];
 
   #fonts
     fonts.fonts = with pkgs; [
-     (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      font-awesome
+     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Iosevka" ]; })
      ];
 
-  #vfio
+
+
+#vfio
 #      pciPassthrough = {
 #    enable = true;
 #    pciIDs = "10de:1ba1,10de:10f0";
 #    libvirtUsers = [ "sager" ];
 #  };
 
-
-
-
-
 #    specialisation."VFIO".configuration = {
 #  system.nixos.tags = [ "with-vfio" ];
 #  vfio.enable = true;
 #};
 
-#    boot.initrd.kernelModules = [
+
+#t.initrd.kernelModules = [
 #  "vfio_pci"
 #  "vfio"
 #  "vfio_iommu_type1"
@@ -45,9 +41,11 @@
 #];
 
   #Nix Virtualisation
-#  virtualisation.spiceUSBRedirection.enable = true;
-#  virtualisation.libvirtd.enable = true;
-#  boot.kernelModules = [ "kvm-intel" ];
+  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.libvirtd.enable = true;
+#boot.kernelModules = [ "kvm-intel" ];
+
+
 
 
   # Bootloader.
@@ -64,6 +62,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  #Bluethooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Kuwait";
@@ -99,23 +100,11 @@
   services.flatpak.enable = true;
 
   # Enable Xwayland
-  programs.xwayland.enable = true;
+  #programs.xwayland.enable = true;             #enabled in flake
+  #programs.hyprland.enable = true;             #enabled in flake.nix
+  #programs.hyprland.nvidiaPatches = true;      #enabled in flake.nix
 
 
-#  Enable sddm+Hyprland + Sway + Nvidia Patch
-#  services.xserver.displayManager.sddm.enable = true;
-#  services.xserver.displayManager.sddm.settings = {
-#      Autologin = {
-#    Session = "Hyprland";
-#    User = "sager";
-#  };
-#};
-#services.xserver.displayManager.defaultSession = "hyprland";
-
-    
-
-#  programs.hyprland.enable = true;             #enabled in flake.nix
-#  programs.hyprland.nvidiaPatches = true;      #enabled in flake.nix
 
   # Configure keymap in X11
   services.xserver = {
@@ -154,32 +143,46 @@
     packages = with pkgs; [
      google-chrome
      discord
-     swaylock-effects swayidle wlogout     #Login etc..  
-     waybar                                #topbar 
-     kanshi                                #laptop dncies
-     rofi hyprpaper dunst                  #home
-     jellyfin-ffmpeg                       #video recorder
-     viewnior                              #image viewr
-   	 pavucontrol                           #Volume control
-   	 xfce.thunar #gnome.nautilus           #filemanager
-   	 xfce.thunar-archive-plugin
-   	 starship                              #topbar dncies
+     swaylock-effects swayidle wlogout swaybg  #Login etc..  
+     waybar                                    #topbar 
+     wayland-protocols
+     kanshi                                    #laptop dncies
+     rofi dunst                                #home
+     jellyfin-ffmpeg                           #video recorder
+     viewnior                                  #image viewr
+   	 pavucontrol                               #Volume control
+   	 xfce.thunar #gnome.nautilus               #filemanager
+     xfce.tumbler
+     starship                                  #topbar dncies
    	 wl-clipboard
    	 wf-recorder
    	 sway-contrib.grimshot                 
-   	 ffmpegthumbnailer                     #thumbnailer
-   	 xfce.tumbler                          #thumbnailer service
-   	 playerctl                             #play,pause..
-   	 pamixer                               #mixer
-   	 nordic
+   	 ffmpegthumbnailer                         #thumbnailer
+   	 playerctl                                 #play,pause..
+   	 pamixer                                   #mixer
+   	 #blueman
+     nordic
    	 papirus-icon-theme
    	 brightnessctl
+     light
+     brillo
      gtk3
      xcur2png
      rubyPackages.glib2
+     kitty
+     libnotify
+     dbus
+     polkit_gnome
+     virtmanager
     ];
   };
 
+#swaylock pass verify
+security.pam.services.swaylock = {
+    text = ''
+      auth include login
+    '';
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -207,14 +210,10 @@
      neovim
      zig
      wget
-     xorg.xkill
+     killall
      git
-     alacritty
      neofetch
      gh
-     python2
-     dbus
-     virtmanager
      #qemu
      #OVMF
      #libvirt
@@ -249,11 +248,16 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
 
+  #Overlays
 
-  #Bleder override to cuda
-  #nixpkgs.config.packageOverrides = self : rec {
-  #  blender = self.blender.override {
-  #    cudaSupport = true;
-  #  };
-  #};
+  #Waybar Workspaces
+    nixpkgs.overlays = [
+    (self: super: {
+      waybar = super.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      });
+    })
+  ];
 }
+
+

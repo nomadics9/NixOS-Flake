@@ -1,10 +1,9 @@
 {
     "height": 40, // Waybar height (to be removed for auto height)
     "layer": "top", // Waybar at top layer
-    "mode": "dock",
     "modules-left": ["custom/launcher","temperature", "cpu", "memory", "wlr/workspaces", "custom/weather"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["tray", "network", "pulseaudio",  "backlight", "battery", "clock", "custom/power-menu"],
+    "modules-right": [ "network", "pulseaudio",  "backlight", "battery", "clock", "tray","custom/power-menu"],
     "wlr/workspaces": {
       "format": "{icon}",
       "all-outputs": true,
@@ -63,6 +62,7 @@
         "interval": 1,
         "on-click": "~/.config/waybar/scripts/network/rofi-network-manager.sh",
         "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+        
     },
 
     "pulseaudio": {
