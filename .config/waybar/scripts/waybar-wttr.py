@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env nix-shell
+#!nix-shell -i python3 -p python310Packages.requests
 
-import json
+import json 
 import requests
 from datetime import datetime
 
