@@ -22,7 +22,7 @@ Usage:
 4. update and switch or boot the flake
    > nix flake update
     - switch or boot
-   > sudo nixos-rebuild switch --flake .#sager <---- change username in Configuration.nix and flake.nix 
+   > sudo nixos-rebuild switch --flake .#sager <---- change username in configuration.nix and flake.nix 
 5. copy .config to ~/.config
    > cp -r .config ~/.config
 
