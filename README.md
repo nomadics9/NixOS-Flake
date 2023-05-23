@@ -30,9 +30,11 @@ Usage:
    > cp -r .config ~/.config
 
 Extras:
-For GTK theming 
+For GTK theming
 nwg-look is required. not in nix repo.
-
 Will upload my nwg-look built pkg here later.
+
+
+SUPER + F1 for all keybinds!
 
 Enjoy~
