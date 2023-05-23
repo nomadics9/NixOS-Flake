@@ -40,10 +40,11 @@
 #  "nvidia_drm"
 #];
 
+
   #Nix Virtualisation
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.libvirtd.enable = true;
-#boot.kernelModules = [ "kvm-intel" ];
+
 
 
 
@@ -53,8 +54,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # Define your hostname
+  networking.hostName = "nixos";
+  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.enable = true;  
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -62,6 +65,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  
   #Bluethooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
@@ -71,8 +75,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_GB.UTF-8";
     LC_IDENTIFICATION = "en_GB.UTF-8";
@@ -104,16 +106,16 @@
   #programs.hyprland.enable = true;             #enabled in flake.nix
   #programs.hyprland.nvidiaPatches = true;      #enabled in flake.nix
 
-
-
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
     xkbVariant = "";
   };
 
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -132,8 +134,10 @@
     #media-session.enable = true;
   };
 
+
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sager = {
@@ -147,23 +151,23 @@
      waybar                                    #topbar 
      wayland-protocols
      kanshi                                    #laptop dncies
-     rofi dunst                                #home
+     rofi dunst rofimoji                       #home
      jellyfin-ffmpeg                           #video recorder
      viewnior                                  #image viewr
-   	 pavucontrol                               #Volume control
-   	 xfce.thunar #gnome.nautilus               #filemanager
+     pavucontrol                               #Volume control
+     xfce.thunar #gnome.nautilus               #filemanager
      xfce.tumbler
+     gnome-text-editor
      starship                                  #topbar dncies
-   	 wl-clipboard
-   	 wf-recorder
-   	 sway-contrib.grimshot                 
-   	 ffmpegthumbnailer                         #thumbnailer
-   	 playerctl                                 #play,pause..
-   	 pamixer                                   #mixer
-   	 #blueman
+     wl-clipboard
+     wf-recorder
+     sway-contrib.grimshot                 
+     ffmpegthumbnailer                         #thumbnailer
+     playerctl                                 #play,pause..
+     pamixer                                   #mixer
      nordic
-   	 papirus-icon-theme
-   	 brightnessctl
+     papirus-icon-theme
+     brightnessctl
      light
      brillo
      gtk3
@@ -183,6 +187,7 @@ security.pam.services.swaylock = {
       auth include login
     '';
   };
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -221,6 +226,7 @@ security.pam.services.swaylock = {
      #bridge-utils
   ];
 
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -228,6 +234,7 @@ security.pam.services.swaylock = {
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
 
   # List services that you want to enable:
 
@@ -248,9 +255,10 @@ security.pam.services.swaylock = {
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
 
+
   #Overlays
 
-  #Waybar Workspaces
+  #Waybar wlr/Workspaces
     nixpkgs.overlays = [
     (self: super: {
       waybar = super.waybar.overrideAttrs (oldAttrs: {

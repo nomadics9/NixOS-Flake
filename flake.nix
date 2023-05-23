@@ -1,5 +1,5 @@
 {
-  description = "My Simple NixOS";
+  description = "Hyprland+waybar";
 
 
   inputs = {
