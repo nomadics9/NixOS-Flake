@@ -100,6 +100,8 @@
   
   #Flatpak
   services.flatpak.enable = true;
+  #locate
+  services.locate.enable = true;
 
   # Enable Xwayland
   #programs.xwayland.enable = true;             #enabled in flake
@@ -157,8 +159,7 @@
      pavucontrol                               #Volume control
      xfce.thunar #gnome.nautilus               #filemanager
      xfce.tumbler
-     gnome-text-editor
-     starship                                  #topbar dncies
+     gnome-text-editor                        
      wl-clipboard
      wf-recorder
      sway-contrib.grimshot                 
@@ -181,6 +182,8 @@
     ];
   };
 
+#starship
+programs.starship.enable = true;
 #swaylock pass verify
 security.pam.services.swaylock = {
     text = ''
