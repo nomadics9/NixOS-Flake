@@ -5,7 +5,8 @@
 { config, pkgs, lib, inputs, ... }:
 {
   # Include the results of the hardware scan.
-    imports = [ ./hardware-configuration.nix];
+    imports = [ ./hardware-configuration.nix 
+    ./vm.nix];
 
   #fonts
     fonts.fonts = with pkgs; [
@@ -42,8 +43,11 @@
 
 
   #Nix Virtualisation
-  virtualisation.spiceUSBRedirection.enable = true;
-  virtualisation.libvirtd.enable = true;
+  #virtualisation.spiceUSBRedirection.enable = true;
+  #virtualisation.libvirtd.enable = true;
+  #virtualisation.libvirtd.qemu.ovmf.enable = true;
+  #virtualisation.libvirtd.qemu.swtpm.enable = true;
+  #environment.sessionVariables.LIBVIRT_DEFAULT_URI = [ "qemu:///system" ];
 
 
 
@@ -145,7 +149,7 @@
   users.users.sager = {
     isNormalUser = true;
     description = "sager";
-    extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
     packages = with pkgs; [
      google-chrome
      discord
@@ -222,8 +226,8 @@ security.pam.services.swaylock = {
      git
      neofetch
      gh
+     #OVMFFull
      #qemu
-     #OVMF
      #libvirt
      #kvmtool
      #bridge-utils
