@@ -43,8 +43,8 @@ in
     boot.extraModprobeConfig ="options vfio-pci ids=${cfg.pciIDs}";
 
     environment.systemPackages = with pkgs; [
-      virtmanager
-      qemu
+      #virtmanager
+      #qemu
       OVMF
       pciutils
     ];
@@ -56,10 +56,11 @@ in
 
     virtualisation.libvirtd.qemu.verbatimConfig = ''
       nvram = [
-      "${pkgs.OVMF}/FV/OVMF.fd:${pkgs.OVMF}/FV/OVMF_VARS.fd"
+      "/nix/store/vcl11xnl86hd1wbqaidlqcaixw9scp1p-OVMF-202205-fd/FV/OVMF.fd:/nix/store/vcl11xnl86hd1wbqaidlqcaixw9scp1p-OVMF-202205-fd/FV/OVMF_VARS.fd"
       ]
     '';
   });
 
 }
+#"${pkgs.OVMF}/FV/OVMF.fd:${pkgs.OVMF}/FV/OVMF_VARS.fd"
 

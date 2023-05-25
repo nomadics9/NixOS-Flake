@@ -16,12 +16,17 @@
 
 
 
-#vfio
+#pci-passthroughnix
+
 #      pciPassthrough = {
 #    enable = true;
 #    pciIDs = "10de:1ba1,10de:10f0";
+#    cpuType = "intel";
 #    libvirtUsers = [ "sager" ];
 #  };
+
+
+#VFIOnix
 
 #    specialisation."VFIO".configuration = {
 #  system.nixos.tags = [ "with-vfio" ];
@@ -174,7 +179,6 @@
      papirus-icon-theme
      brightnessctl
      light
-     brillo
      gtk3
      xcur2png
      rubyPackages.glib2
@@ -182,7 +186,10 @@
      libnotify
      dbus
      polkit_gnome
-     virtmanager
+     #photoshop dencies
+     gnome.zenity
+     wine64Packages.waylandFull
+     curl
     ];
   };
 

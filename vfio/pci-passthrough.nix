@@ -17,13 +17,14 @@
   boot.extraModprobeConfig ="options vfio-pci ids=10de:1ba1,10de:10f0";
   
   environment.systemPackages = with pkgs; [
-    virtmanager
+    #virtmanager
     qemu
     OVMF
+    pciutils
   ];
   
   virtualisation.libvirtd.enable = true;
-  virtualisation.libvirtd.enableKVM = true;
+  virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
   
   # oCHANGE: add your own user here
   users.groups.libvirtd.members = [ "root" "sager"];
@@ -31,9 +32,9 @@
   # oCHANGE: use 
   #     ls /nix/store/*OVMF*/FV/OVMF{,_VARS}.fd | tail -n2 | tr '\n' : | sed -e 's/:$//'
   # to find your nix store paths
-  virtualisation.libvirtd.qemuVerbatimConfig = ''
+  virtualisation.libvirtd.qemu.verbatimConfig = ''
     nvram = [
-      "/nix/store/awlsfbjbiq46dgsam90ay5rjazyk47sx-OVMF-202211-fd/FV/OVMF.fd:/nix/store/awlsfbjbiq46dgsam90ay5rjazyk47sx-OVMF-202211-fd/FV/OVMF_VARS.fd"
+      "/nix/store/vcl11xnl86hd1wbqaidlqcaixw9scp1p-OVMF-202205-fd/FV/OVMF.fd:/nix/store/vcl11xnl86hd1wbqaidlqcaixw9scp1p-OVMF-202205-fd/FV/OVMF_VARS.fd"
     ]
   '';
 
