@@ -13,7 +13,8 @@
       font-awesome
      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Iosevka" ]; })
      ];
-
+  #emojis
+    #services.gollum.emoji = true;
 
 
 #pci-passthroughnix
@@ -22,7 +23,7 @@
 #    enable = true;
 #    pciIDs = "10de:1ba1,10de:10f0";
 #    cpuType = "intel";
-#    libvirtUsers = [ "sager" ];
+#    libvirtUsers = [ "sager" ];[
 #  };
 
 
@@ -34,7 +35,7 @@
 #};
 
 
-#t.initrd.kernelModules = [
+#t.initrd.kernelModules = 
 #  "vfio_pci"
 #  "vfio"
 #  "vfio_iommu_type1"
@@ -103,19 +104,31 @@
   # Enable Gnome login
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
+  # displayManager.defaultSession = "hyprland";
+  # displayManager.session = [
+  #   {
+  #    manage = "desktop";
+  #     name = "none+Hyprland"
+  #     start = ''exec $HOME/.xsession'';
+  #     }
+  #   ];   
 
   # Gnome environment
   #services.xserver.desktopManager.gnome.enable = true;
   
+  #sddm
+  #services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.displayManager.defaultSession = "hyprland";
+
   #Flatpak
   services.flatpak.enable = true;
   #locate
   services.locate.enable = true;
 
   # Enable Xwayland
-  #programs.xwayland.enable = true;             #enabled in flake
-  #programs.hyprland.enable = true;             #enabled in flake.nix
-  #programs.hyprland.nvidiaPatches = true;      #enabled in flake.nix
+  programs.xwayland.enable = true;             #enabled in flake
+  programs.hyprland.enable = true;             #enabled in flake.nix
+  programs.hyprland.nvidiaPatches = true;      #enabled in flake.nix
 
   # Configure keymap in X11
   services.xserver = {
@@ -151,11 +164,12 @@
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.sager = {
+  users.users.nomad = {
     isNormalUser = true;
-    description = "sager";
+    description = "nomad";
     extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
     packages = with pkgs; [
+     neovim
      google-chrome
      discord
      swaylock-effects swayidle wlogout swaybg  #Login etc..  
@@ -166,9 +180,10 @@
      jellyfin-ffmpeg                           #video recorder
      viewnior                                  #image viewr
      pavucontrol                               #Volume control
-     xfce.thunar #gnome.nautilus               #filemanager
-     xfce.tumbler
-     gnome-text-editor                        
+     xfce.thunar                               #filemanager
+     gnome-text-editor
+     gnome.file-roller
+     gnome.gnome-font-viewer
      wl-clipboard
      wf-recorder
      sway-contrib.grimshot                 
@@ -178,17 +193,21 @@
      nordic
      papirus-icon-theme
      brightnessctl
-     light
+     ####GTK Customization####
      gtk3
+     glib
      xcur2png
      rubyPackages.glib2
+     #########################
      kitty
      libnotify
      dbus
      polkit_gnome
-     #photoshop dencies
+     xdg-desktop-portal-hyprland
+     ####photoshop dencies####
      gnome.zenity
      wine64Packages.waylandFull
+     #########################
      curl
     ];
   };
@@ -202,8 +221,16 @@ security.pam.services.swaylock = {
     '';
   };
 
+#thunar dencies
+programs.thunar.plugins = with pkgs.xfce; [
+  thunar-archive-plugin
+  thunar-volman
+];
+services.gvfs.enable = true; 
+services.tumbler.enable = true; 
+ 
 
-  # Allow unfree packages
+ # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
   #Nvidia
@@ -226,7 +253,7 @@ security.pam.services.swaylock = {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
  # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     neovim
+     vim
      zig
      wget
      killall

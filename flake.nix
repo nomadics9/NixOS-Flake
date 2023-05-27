@@ -3,7 +3,7 @@
 
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     hyprland.url = "github:hyprwm/Hyprland";
    };
 
@@ -18,7 +18,7 @@
         lib = nixpkgs.lib;
     in {
         nixosConfigurations = {
-          sager = nixpkgs.lib.nixosSystem {
+          nomad = nixpkgs.lib.nixosSystem {
               inherit system;
               modules = [ ./configuration.nix 
               hyprland.nixosModules.default

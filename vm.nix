@@ -6,7 +6,7 @@
   programs.dconf.enable = true;
 
   # Add user to libvirtd group
-  users.users.sager.extraGroups = [ "libvirtd" ];
+  users.users.nomad.extraGroups = [ "libvirtd" ];
 
   # Install necessary packages
   environment.systemPackages = with pkgs; [
