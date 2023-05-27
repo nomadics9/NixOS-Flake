@@ -184,12 +184,17 @@
      gnome-text-editor
      gnome.file-roller
      gnome.gnome-font-viewer
+     gnome.gnome-calculator
+     vlc
+     amberol
+     cava
      wl-clipboard
      wf-recorder
      sway-contrib.grimshot                 
      ffmpegthumbnailer                         #thumbnailer
      playerctl                                 #play,pause..
      pamixer                                   #mixer
+     cava
      nordic
      papirus-icon-theme
      brightnessctl

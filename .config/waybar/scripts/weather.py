@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i python3 -p python310Packages.requests
+#!nix-shell -i python -p python3 python310Packages.hjson python310Packages.requests
 
 import json
 import requests

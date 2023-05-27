@@ -1,8 +1,8 @@
 {
     "height": 40, // Waybar height (to be removed for auto height)
     "layer": "top", // Waybar at top layer
-    "modules-left": ["custom/launcher","temperature", "cpu", "memory", "wlr/workspaces", "custom/weather"],
-    "modules-center": ["hyprland/window"],
+    "modules-left": ["custom/launcher","temperature", "cpu", "memory", "custom/weather", "wlr/workspaces"],
+    "modules-center": ["mpris"],
     "modules-right": [ "network", "pulseaudio",  "backlight", "battery", "clock", "tray","custom/power-menu"],
     "wlr/workspaces": {
       "format": "{icon}",
@@ -10,11 +10,12 @@
       "on-click": "activate",
       "format-icons": {
         "active": " 󰮯",
-        "default": "",
+        "default": "󰌽",
       }
     },
     "hyprland/window": {
         "format": "{}"
+        
     },
     "tray": {
         "spacing": 10
@@ -27,7 +28,7 @@
 
     "cpu": {
       "interval": 10,
-      "format": " {}%",
+      "format": "  {}%",
       "max-length": 10,
       "on-click": "",
     },
@@ -39,7 +40,7 @@
     },
     "temperature": {
         "interval": 10,
-        "format": "❂ {temperatureC}°C",
+        "format": " {temperatureC}°C",
         "format-alt":"temprature",
         "max-length": 10,
     },
@@ -52,29 +53,41 @@
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-",
         "smooth-scrolling-threshold": "2400",
+	"tooltip-format" : "Brightness {percent}%",
     },
     "network": {
         /* "format-wifi": "直", */
         "format-wifi": "<small>{bandwidthUpBytes}↑ {bandwidthDownBytes}↓</small> {icon}",
-        "format-ethernet": " ",
-        "format-disconnected": "睊",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰤭",
         "tooltip-format": "{essid}",
         "interval": 1,
         "on-click": "~/.config/waybar/scripts/network/rofi-network-manager.sh",
         "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
         
     },
+           "bluetooth": {
+                "format": "{icon}",
+                "format-alt": "bluetooth: {status}",
+                "interval": 30,
+                "format-icons": {
+                     "enabled": "",
+                     "disabled": "󰂲"
+                  
+                },
+                "tooltip-format": "{status}"
+           },
 
     "pulseaudio": {
         "format": "{icon}",
-        "format-muted": "婢",
+        "format-muted": "󰖁",
         "format-icons": {
-            "default": ["", "", "墳"]
+            "default": ["", "", "󰕾"]
         },
         "on-click": "pamixer -t",
         "on-scroll-up": "pamixer -i 1",
         "on-scroll-down": "pamixer -d 1",
-        "tooltip-format" : "Volume {volume}%"
+        "tooltip-format" : "Volume {volume}%",
     },
 
     "battery": {
@@ -90,14 +103,18 @@
       "format-warning": "{icon}",
       "format-critical": "{icon}",
       "format-charging": "<span font-family='Font Awesome 6 Free'></span>",
-      "format-plugged": "ﮣ", 
+      "format-plugged": "󰚥", 
+      "format-notcharging": "󰚥",
+      "format-alt": "{icon}<small> {time}</small>",
+      "format-full": "󰂄", 
+ 
 
       "format-alt": "{icon}<small> {time}</small>",
-      "format-full": "ﮣ", 
+      "format-full": "󰚥", 
       "format-icons": ["󱊡", "󱊢", "󱊣"]
     },
     "custom/weather": {
-      "exec": "python3 ~/.config/waybar/scripts/weather.py",
+      "exec": "nix-shell ~/.config/waybar/scripts/weather.py",
       "restart-interval": 300,
       "return-type": "json",
     },   
@@ -106,8 +123,24 @@
        "on-click": "swaylock",
        "format" : "",
     },
+    
+      "mpris": {
+  	"format": "{player_icon} {title}",
+  	"format-paused": " {status_icon} <i>{title}</i>",
+  	"player-icons": {
+  		"default": "▶",
+  		"mpv": "🎵"
+  	},
+  	"status-icons": {
+  		"paused": "⏸"
+  	},
+  	// "ignored-players": ["firefox"]
+  },
+        
+
+    
    "custom/spotify": {
-        "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
+        "exec": "nix-shell ~/.config/waybar/scripts/mediaplayer.py --player youtube-music",
         "format": " {}",
         "return-type": "json",
         "on-click": "playerctl play-pause",
@@ -119,7 +152,7 @@
         "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh &",
     }, 
     "custom/launcher": {
-        "format": "❄",
+        "format": "󱄅",
         "on-click": "rofi -show drun &",
     },
 }
