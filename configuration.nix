@@ -170,7 +170,7 @@
     extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
     packages = with pkgs; [
      neovim
-     google-chrome
+     google-chrome-beta
      discord
      swaylock-effects swayidle wlogout swaybg  #Login etc..  
      waybar                                    #topbar 
@@ -211,6 +211,9 @@
      curl
     ];
   };
+
+#upower dbus
+services.upower.enable = true;
 
 #starship
 programs.starship.enable = true;
@@ -284,7 +287,8 @@ services.tumbler.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+    #For Chromecast from chrome
+    networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
