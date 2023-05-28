@@ -206,6 +206,7 @@
      #########################
      kitty
      libnotify
+     poweralertd
      dbus
      polkit_gnome
      xdg-desktop-portal-hyprland
