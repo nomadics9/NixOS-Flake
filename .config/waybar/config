@@ -3,7 +3,7 @@
     "layer": "top", // Waybar at top layer
     "modules-left": ["custom/launcher","temperature", "cpu", "memory", "custom/weather", "wlr/workspaces"],
     "modules-center": ["mpris"],
-    "modules-right": [ "network", "pulseaudio",  "backlight", "battery", "clock", "tray","custom/power-menu"],
+    "modules-right": [ "network", "pulseaudio",  "backlight", "battery", "clock", "custom/wallpaper","tray","custom/power-menu"],
     "wlr/workspaces": {
       "format": "{icon}",
       "all-outputs": true,
@@ -155,4 +155,8 @@
         "format": "󱄅",
         "on-click": "rofi -show drun &",
     },
+    "custom/wallpaper": {
+       "format": "💻",
+       "on-click": "bash ~/.config/waybar/scripts/changewallpaper.sh",
+    } 
 }

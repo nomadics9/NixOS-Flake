@@ -24,7 +24,7 @@ window#waybar.hidden {
 
 #clock,
 #temperature,
-#mpris,
+#mpris, 
 #cpu,
 #memory,
 #custom-media,
@@ -33,6 +33,7 @@ window#waybar.hidden {
 #custom-lock,
 #workspaces,
 #idle_inhibitor,
+#custom-wallpaper, 
 #custom-power-menu,
 #custom-launcher,
 #custom-spotify,
@@ -332,4 +333,10 @@ label:focus {
 
 #custom-weather.default {
   color: #dbd9d8;
+}
+
+#custom-wallpaper {
+  color: #dbd9d8;
+  padding-right: 6;
+  padding-left: 6;
 }
