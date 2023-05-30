@@ -8,6 +8,30 @@
     imports = [ ./hardware-configuration.nix 
     ./vm.nix];
 
+
+programs.bash.shellAliases = {
+  clean = "sudo nix-collect-garbage -d";
+  cleanold = "sudo nix-collect-garbage --delete-old";
+  cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
+};
+
+systemd = {
+  user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+  };
+};
+
+
   #fonts
     fonts.fonts = with pkgs; [
       font-awesome
@@ -104,6 +128,7 @@
   # Enable Gnome login
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
+
   # displayManager.defaultSession = "hyprland";
   # displayManager.session = [
   #   {
@@ -142,7 +167,7 @@
 
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  #sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -152,7 +177,8 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-
+    #wireplumber.enable= true;
+  
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
@@ -162,6 +188,30 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  
+  #xdg
+  
+  xdg.portal = {
+  enable = true;
+  extraPortals = with pkgs; [
+    xdg-desktop-portal-wlr
+  ];
+
+    wlr = {
+    enable = true;
+      };
+    };
+
+  environment.etc."xdg/user-dirs.defaults".text= ''
+    DESKTOP=system/Desktop
+    DOWNLOAD=system/Downloads
+    TEMPLATES=system/Templates
+    PUBLICSHARE=system/Public
+    DOCUMENTS=system/Documents
+    MUSIC=Media/music
+    PICTURES=Media/photos
+    VIDEOS=Media/video 
+    '';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nomad = {
@@ -171,12 +221,11 @@
     packages = with pkgs; [
      neovim
      google-chrome-beta
-     discord
      swaylock-effects swayidle wlogout swaybg  #Login etc..  
      waybar                                    #topbar 
      wayland-protocols
      kanshi                                    #laptop dncies
-     rofi dunst rofimoji                       #home
+     rofi mako rofimoji                        #home
      jellyfin-ffmpeg                           #video recorder
      viewnior                                  #image viewr
      pavucontrol                               #Volume control
@@ -203,6 +252,7 @@
      glib
      xcur2png
      rubyPackages.glib2
+     libcanberra-gtk3                          #notification sound
      #########################
      kitty
      libnotify
@@ -236,8 +286,18 @@ programs.thunar.plugins = with pkgs.xfce; [
   thunar-volman
 ];
 services.gvfs.enable = true; 
-services.tumbler.enable = true; 
- 
+services.tumbler.enable = true;
+
+#gnome outside gnome
+programs.dconf.enable = true;
+
+#Steam
+
+programs.steam = {
+  enable = true;
+  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+};
 
  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
