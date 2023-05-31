@@ -130,22 +130,42 @@ systemd = {
   # Enable Gnome login
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
-
-  # displayManager.defaultSession = "hyprland";
-  # displayManager.session = [
-  #   {
-  #    manage = "desktop";
-  #     name = "none+Hyprland"
-  #     start = ''exec $HOME/.xsession'';
-  #     }
-  #   ];   
+  #services.xserver.displayManager.gdm.settings = {
+  #};
 
   # Gnome environment
-  #services.xserver.desktopManager.gnome.enable = true;
+#  services.xserver.desktopManager.gnome.enable = true;
+#  environment.gnome.excludePackages = 
+#(with pkgs; [
+#  gnome-photos
+#  gnome-tour
+#]) ++ (with pkgs.gnome; [
+#  cheese # webcam tool
+#  gnome-music
+#  gnome-terminal
+#  gedit # text editor
+#  epiphany # web browser
+#  geary # email reader
+#  evince # document viewer
+#  gnome-characters
+#  totem # video player
+#  tali # poker game
+#  iagno # go game
+#  hitori # sudoku game
+#  atomix # puzzle game
+#  rygel
+#  yelp
+#  gnome-logs
+#  gnome-clocks
+#  gnome-contacts
+  
+#]);
+  
+ services.xserver.displayManager.defaultSession = "hyprland";
+  
   
   #sddm
   #services.xserver.displayManager.sddm.enable = true;
-  #services.xserver.displayManager.defaultSession = "hyprland";
 
   #Flatpak
   services.flatpak.enable = true;
@@ -205,11 +225,11 @@ systemd = {
     };
 
   environment.etc."xdg/user-dirs.defaults".text= ''
-    DESKTOP=system/Desktop
-    DOWNLOAD=system/Downloads
-    TEMPLATES=system/Templates
-    PUBLICSHARE=system/Public
-    DOCUMENTS=system/Documents
+    DESKTOP=System/Desktop
+    DOWNLOAD=System/Downloads
+    TEMPLATES=System/Templates
+    PUBLICSHARE=System/Public
+    DOCUMENTS=System/Documents
     MUSIC=Media/music
     PICTURES=Media/photos
     VIDEOS=Media/video 
@@ -269,6 +289,10 @@ systemd = {
      curl
     ];
   };
+
+
+#tlp
+services.tlp.enable = true;
 
 #upower dbus
 services.upower.enable = true;
