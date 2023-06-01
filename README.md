@@ -10,6 +10,8 @@ NixOS with personal packages running on HyprlandWM + Waybar
 
 ![ScreenShot](https://i.ibb.co/M9gs7n5/2023-05-22-T23-07-35-808155981-03-00.png)
 
+Added some more features in waybar
+![ScreenShot](https://i.ibb.co/6HRpPHX/screenshot.jpg)
 
 [![](https://markdown-videos.deta.dev/youtube/PjE-PTNWwqs)](https://youtu.be/PjE-PTNWwqs)
 
@@ -25,9 +27,9 @@ Usage:
 4. update and switch or boot the flake
    > nix flake update
     - switch or boot
-   > sudo nixos-rebuild switch --flake .#sager <---- change username in configuration.nix and flake.nix 
-5. copy .config to ~/.config
-   > cp -r .config ~/.config
+   > sudo nixos-rebuild switch --flake .#nomad <---- change username in configuration.nix and flake.nix 
+5. copy .config to ~/
+   > cp -r .config ~/
 
 Extras:
 For GTK theming
