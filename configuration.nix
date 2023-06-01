@@ -161,7 +161,7 @@ systemd = {
   
 #]);
   
- services.xserver.displayManager.defaultSession = "hyprland";
+  services.xserver.displayManager.defaultSession = "hyprland";
   
   
   #sddm
@@ -199,6 +199,8 @@ systemd = {
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
+
+    #isDefault
     #wireplumber.enable= true;
   
     # use the example session manager (no others are packaged yet so this is enabled by default,
@@ -247,8 +249,8 @@ systemd = {
      waybar                                    #topbar 
      wayland-protocols
      kanshi                                    #laptop dncies
-     rofi mako rofimoji                        #home
-     jellyfin-ffmpeg                           #video recorder
+     rofi mako rofimoji                        #Drawer + notifications
+     jellyfin-ffmpeg                           #multimedia libs
      viewnior                                  #image viewr
      pavucontrol                               #Volume control
      xfce.thunar                               #filemanager
@@ -256,37 +258,38 @@ systemd = {
      gnome.file-roller
      gnome.gnome-font-viewer
      gnome.gnome-calculator
-     vlc
-     amberol
-     cava
-     wl-clipboard
-     wf-recorder
-     sway-contrib.grimshot                 
+     vlc                                       #Video player
+     amberol                                   #Music player
+     cava                                      #Sound Visualized
+     wl-clipboard                              
+     wf-recorder                               #Video recorder
+     sway-contrib.grimshot                     #Screenshot
      ffmpegthumbnailer                         #thumbnailer
      playerctl                                 #play,pause..
      pamixer                                   #mixer
-     cava
+     brightnessctl                             #Brightness control
+     ####GTK Customization####
      nordic
      papirus-icon-theme
-     brightnessctl
-     ####GTK Customization####
      gtk3
      glib
      xcur2png
      rubyPackages.glib2
      libcanberra-gtk3                          #notification sound
-     #########################
+     #########System#########
      kitty
      libnotify
      poweralertd
      dbus
      polkit_gnome
+     gsettings-desktop-schemas
+     wrapGAppsHook
      xdg-desktop-portal-hyprland
      ####photoshop dencies####
      gnome.zenity
      wine64Packages.waylandFull
-     #########################
      curl
+     #########################
     ];
   };
 
@@ -299,6 +302,7 @@ services.upower.enable = true;
 
 #starship
 programs.starship.enable = true;
+
 #swaylock pass verify
 security.pam.services.swaylock = {
     text = ''
@@ -318,12 +322,13 @@ services.tumbler.enable = true;
 programs.dconf.enable = true;
 
 #Steam
-
 programs.steam = {
   enable = true;
   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
 };
+
+
 
  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
