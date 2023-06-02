@@ -30,7 +30,7 @@
               {home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.nomad = import ./home.nix;
-              home-manager.extraSpecialArgs = true;}
+              }
 ];
             };
           };
