@@ -17,21 +17,21 @@ programs.bash.shellAliases = {
   cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
 };
 
-systemd = {
-  user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-  };
-};
+#systemd = {
+#  user.services.polkit-gnome-authentication-agent-1 = {
+#    description = "polkit-gnome-authentication-agent-1";
+#    wantedBy = [ "graphical-session.target" ];
+#    wants = [ "graphical-session.target" ];
+#    after = [ "graphical-session.target" ];
+#    serviceConfig = {
+#        Type = "simple";
+#        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+#        Restart = "on-failure";
+#        RestartSec = 1;
+#        TimeoutStopSec = 10;
+#      };
+#  };
+#};
 
 
   #fonts
@@ -161,7 +161,7 @@ systemd = {
   
 #]);
   
-  services.xserver.displayManager.defaultSession = "hyprland";
+  #services.xserver.displayManager.defaultSession = "hyprland";
   
   
   #sddm
@@ -189,7 +189,7 @@ systemd = {
 
 
   # Enable sound with pipewire.
-  #sound.enable = true;
+  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -215,16 +215,17 @@ systemd = {
   
   #xdg
   
-  xdg.portal = {
-  enable = true;
-  extraPortals = with pkgs; [
-    xdg-desktop-portal-wlr
-  ];
+#  xdg.portal = {
+#  enable = true;
+#  extraPortals = with pkgs; [
+#    xdg-desktop-portal-wlr
+#  ];
+#  };
 
-    wlr = {
-    enable = true;
-      };
-    };
+#    wlr = {
+#    enable = true;
+#      };
+#    };
 
   environment.etc."xdg/user-dirs.defaults".text= ''
     DESKTOP=System/Desktop
@@ -248,6 +249,7 @@ systemd = {
      swaylock-effects swayidle wlogout swaybg  #Login etc..  
      waybar                                    #topbar 
      wayland-protocols
+     libsForQt5.qt5.qtwayland
      kanshi                                    #laptop dncies
      rofi mako rofimoji                        #Drawer + notifications
      jellyfin-ffmpeg                           #multimedia libs
@@ -278,13 +280,13 @@ systemd = {
      libcanberra-gtk3                          #notification sound
      #########System#########
      kitty
+     gnome.gnome-system-monitor
      libnotify
      poweralertd
      dbus
-     polkit_gnome
-     gsettings-desktop-schemas
-     wrapGAppsHook
-     xdg-desktop-portal-hyprland
+     #gsettings-desktop-schemas
+     #wrapGAppsHook
+     #xdg-desktop-portal-hyprland
      ####photoshop dencies####
      gnome.zenity
      wine64Packages.waylandFull
@@ -385,9 +387,9 @@ programs.steam = {
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
     #For Chromecast from chrome
-    networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
+#    networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+   networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
