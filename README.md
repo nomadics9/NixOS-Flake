@@ -27,16 +27,27 @@ Usage:
 4. update and switch or boot the flake
    > nix flake update
     - switch or boot
-   > sudo nixos-rebuild switch --flake .#nomad <---- change username in configuration.nix and flake.nix 
+   > sudo nixos-rebuild switch --flake .#nomad <---- change username in configuration.nix , flake.nix and home.nix
 5. copy .config to ~/
    > cp -r .config ~/
 
 Extras:
-For GTK theming
-nwg-look is required. not in nix repo.
-Will upload my nwg-look built pkg here later.
+For GTK theming:<br>
+<s>nwg-look is required. not in nix repo.
+Will upload my nwg-look built pkg here later.</s><br>
+
+<b>NO NEED FOR NWG ANYMORE ALL THROUGH HOME MANAGER</b> 🙋<br>
+
+for wallpapers to work place all wallpapers in <b>~/Desktop/wallpapers</b>
 
 
-SUPER + F1 for all keybinds!
+
+todo:
+dotfiles in homemanager aswell<br>
+script to install <br>
+
+
+SUPER + F1 for all keybinds!<br>
 
 Enjoy~
+
