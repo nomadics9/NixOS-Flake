@@ -8,10 +8,9 @@
 
 
   #Gtk 
-
     gtk = {
       enable = true;
-      font.name = "TeX-Gyre-Adventor";
+      font.name = "TeX Gyre Adventor 10";
       theme = {
         name = "Juno";
         package = pkgs.juno-theme;

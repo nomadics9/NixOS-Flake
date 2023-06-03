@@ -256,6 +256,7 @@ programs.bash.shellAliases = {
      viewnior                                  #image viewr
      pavucontrol                               #Volume control
      xfce.thunar                               #filemanager
+     xfce.xfconf
      gnome-text-editor
      gnome.file-roller
      gnome.gnome-font-viewer
