@@ -2,7 +2,7 @@
 
 {
 
-  # Enable dconf (System Management Tool)
+  # Enable dconf (System Management Tool) enabled in users.nix
   programs.dconf.enable = true;
 
   # Add user to libvirtd group
@@ -17,6 +17,7 @@
     win-virtio
     win-spice
     gnome.adwaita-icon-theme
+    #bridge-utils
   ];
 
   # Manage the virtualisation services

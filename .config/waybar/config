@@ -125,8 +125,8 @@
     },
     
       "mpris": {
-  	"format": "{player_icon} {title}",
-  	"format-paused": " {status_icon} <i>{title}</i>",
+  	"format": "<small>{player_icon} {title}</small>",
+  	"format-paused": "<small> {status_icon} <i>{title}</i> </small>",
   	"player-icons": {
   		"default": "▶",
   		"mpv": "🎵"

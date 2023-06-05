@@ -6,32 +6,27 @@
 {
   # Include the results of the hardware scan.
     imports = [ ./hardware-configuration.nix 
-    ./vm.nix];
+    ./modules/vm.nix
+    ./modules/shell.nix
+    ./modules/users.nix];
 
 
-programs.bash.shellAliases = {
-  switch = "sudo nixos-rebuild switch --flake .#nomad";
-  switchu = "sudo nixos-rebuild switch --upgrade --flake .#nomad";
-  clean = "sudo nix-collect-garbage -d";
-  cleanold = "sudo nix-collect-garbage --delete-old";
-  cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
-};
 
-#systemd = {
-#  user.services.polkit-gnome-authentication-agent-1 = {
-#    description = "polkit-gnome-authentication-agent-1";
-#    wantedBy = [ "graphical-session.target" ];
-#    wants = [ "graphical-session.target" ];
-#    after = [ "graphical-session.target" ];
-#    serviceConfig = {
-#        Type = "simple";
-#        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-#        Restart = "on-failure";
-#        RestartSec = 1;
-#        TimeoutStopSec = 10;
-#      };
-#  };
-#};
+  #systemd = {
+  #  user.services.polkit-gnome-authentication-agent-1 = {
+  #    description = "polkit-gnome-authentication-agent-1";
+  #    wantedBy = [ "graphical-session.target" ];
+  #    wants = [ "graphical-session.target" ];
+  #    after = [ "graphical-session.target" ];
+  #    serviceConfig = {
+  #        Type = "simple";
+  #        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  #        Restart = "on-failure";
+  #        RestartSec = 1;
+  #        TimeoutStopSec = 10;
+  #      };
+  #  };
+  #};
 
 
   #fonts
@@ -41,48 +36,6 @@ programs.bash.shellAliases = {
      ];
   #emojis
     #services.gollum.emoji = true;
-
-
-#pci-passthroughnix
-
-#      pciPassthrough = {
-#    enable = true;
-#    pciIDs = "10de:1ba1,10de:10f0";
-#    cpuType = "intel";
-#    libvirtUsers = [ "sager" ];[
-#  };
-
-
-#VFIOnix
-
-#    specialisation."VFIO".configuration = {
-#  system.nixos.tags = [ "with-vfio" ];
-#  vfio.enable = true;
-#};
-
-
-#t.initrd.kernelModules = 
-#  "vfio_pci"
-#  "vfio"
-#  "vfio_iommu_type1"
-#  "vfio_virqfd"
-
-#  "nvidia"
-#  "nvidia_modeset"
-#  "nvidia_uvm"
-#  "nvidia_drm"
-#];
-
-
-  #Nix Virtualisation
-  #virtualisation.spiceUSBRedirection.enable = true;
-  #virtualisation.libvirtd.enable = true;
-  #virtualisation.libvirtd.qemu.ovmf.enable = true;
-  #virtualisation.libvirtd.qemu.swtpm.enable = true;
-  #environment.sessionVariables.LIBVIRT_DEFAULT_URI = [ "qemu:///system" ];
-
-
-
 
 
   # Bootloader.
@@ -133,37 +86,6 @@ programs.bash.shellAliases = {
   #services.xserver.displayManager.gdm.settings = {
   #};
 
-  # Gnome environment
-#  services.xserver.desktopManager.gnome.enable = true;
-#  environment.gnome.excludePackages = 
-#(with pkgs; [
-#  gnome-photos
-#  gnome-tour
-#]) ++ (with pkgs.gnome; [
-#  cheese # webcam tool
-#  gnome-music
-#  gnome-terminal
-#  gedit # text editor
-#  epiphany # web browser
-#  geary # email reader
-#  evince # document viewer
-#  gnome-characters
-#  totem # video player
-#  tali # poker game
-#  iagno # go game
-#  hitori # sudoku game
-#  atomix # puzzle game
-#  rygel
-#  yelp
-#  gnome-logs
-#  gnome-clocks
-#  gnome-contacts
-  
-#]);
-  
-  #services.xserver.displayManager.defaultSession = "hyprland";
-  
-  
   #sddm
   #services.xserver.displayManager.sddm.enable = true;
 
@@ -186,7 +108,6 @@ programs.bash.shellAliases = {
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -215,17 +136,17 @@ programs.bash.shellAliases = {
   
   #xdg
   
-#  xdg.portal = {
-#  enable = true;
-#  extraPortals = with pkgs; [
-#    xdg-desktop-portal-wlr
-#  ];
+  #  xdg.portal = {
+    #  enable = true;
+    #  extraPortals = with pkgs; [
+    #    xdg-desktop-portal-wlr
+  #  ];
 #  };
 
-#    wlr = {
-#    enable = true;
-#      };
-#    };
+  #  wlr = {
+  #   enable = true;
+  #  };
+#  };
 
   environment.etc."xdg/user-dirs.defaults".text= ''
     DESKTOP=System/Desktop
@@ -238,108 +159,52 @@ programs.bash.shellAliases = {
     VIDEOS=Media/video 
     '';
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nomad = {
-    isNormalUser = true;
-    description = "nomad";
-    extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
-    packages = with pkgs; [
-     neovim
-     google-chrome-beta
-     swaylock-effects swayidle wlogout swaybg  #Login etc..  
-     waybar                                    #topbar 
-     wayland-protocols
-     libsForQt5.qt5.qtwayland
-     kanshi                                    #laptop dncies
-     rofi mako rofimoji                        #Drawer + notifications
-     jellyfin-ffmpeg                           #multimedia libs
-     viewnior                                  #image viewr
-     pavucontrol                               #Volume control
-     xfce.thunar                               #filemanager
-     xfce.xfconf
-     gnome-text-editor
-     gnome.file-roller
-     gnome.gnome-font-viewer
-     gnome.gnome-calculator
-     vlc                                       #Video player
-     amberol                                   #Music player
-     cava                                      #Sound Visualized
-     wl-clipboard                              
-     wf-recorder                               #Video recorder
-     sway-contrib.grimshot                     #Screenshot
-     ffmpegthumbnailer                         #thumbnailer
-     playerctl                                 #play,pause..
-     pamixer                                   #mixer
-     brightnessctl                             #Brightness control
-     ####GTK Customization####
-     nordic
-     papirus-icon-theme
-     gtk3
-     glib
-     xcur2png
-     rubyPackages.glib2
-     libcanberra-gtk3                          #notification sound
-     #########System#########
-     kitty
-     gnome.gnome-system-monitor
-     libnotify
-     poweralertd
-     dbus
-     #gsettings-desktop-schemas
-     #wrapGAppsHook
-     #xdg-desktop-portal-hyprland
-     ####photoshop dencies####
-     gnome.zenity
-     wine64Packages.waylandFull
-     curl
-     #########################
-    ];
-  };
 
+  #Services
+  #tlp
+  services.tlp.enable = true;
 
-#tlp
-services.tlp.enable = true;
+  #upower dbus
+  services.upower.enable = true;
 
-#upower dbus
-services.upower.enable = true;
-
-#starship
-programs.starship.enable = true;
-
-#swaylock pass verify
-security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
-  };
-
-#thunar dencies
-programs.thunar.plugins = with pkgs.xfce; [
-  thunar-archive-plugin
-  thunar-volman
-];
-services.gvfs.enable = true; 
-services.tumbler.enable = true;
-
-#gnome outside gnome
-programs.dconf.enable = true;
-
-#Steam
-programs.steam = {
-  enable = true;
-  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-};
-
-
-
- # Allow unfree packages
+  #Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
   #Nvidia
-  services.xserver.videoDrivers = [ "nvidia" ];
+  #services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
   
+  services.xserver = {
+    videoDrivers = [ "nvidia" ];
+
+    config = ''
+      Section "Device"
+          Identifier  "Intel Graphics"
+          Driver      "intel"
+          #Option      "AccelMethod"  "sna" # default
+          #Option      "AccelMethod"  "uxa" # fallback
+          Option      "TearFree"        "true"
+          Option      "SwapbuffersWait" "true"
+          BusID       "PCI:0:2:0"
+          #Option      "DRI" "2"             # DRI3 is now default
+      EndSection
+
+      Section "Device"
+          Identifier "nvidia"
+          Driver "nvidia"
+          BusID "PCI:1:0:0"
+          Option "AllowEmptyInitialConfiguration"
+      EndSection
+    '';
+    screenSection = ''
+      Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+      Option         "AllowIndirectGLXProtocol" "off"
+      Option         "TripleBuffer" "on"
+    '';
+  };
+
+
+
   #Cuda
   services.xmr-stak.cudaSupport = true;
   
@@ -363,11 +228,6 @@ programs.steam = {
      git
      neofetch
      gh
-     #OVMFFull
-     #qemu
-     #libvirt
-     #kvmtool
-     #bridge-utils
   ];
 
 
@@ -400,17 +260,6 @@ programs.steam = {
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
 
-
-  #Overlays
-
-  #Waybar wlr/Workspaces
-    nixpkgs.overlays = [
-    (self: super: {
-      waybar = super.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      });
-    })
-  ];
 }
 
 
