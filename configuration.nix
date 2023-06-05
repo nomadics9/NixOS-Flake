@@ -6,9 +6,9 @@
 {
   # Include the results of the hardware scan.
     imports = [ ./hardware-configuration.nix 
-    modules/vm.nix
-    modules/shell.nix
-    modules/users.nix];
+    (modulesPath + "/home.nix")
+    (modulesPath + "/shell.nix")
+    (modulesPath + "/users.nix")];
 
 
 
