@@ -19,7 +19,7 @@
         lib = nixpkgs.lib;
     in {
         nixosConfigurations = {
-          nomad = nixpkgs.lib.nixosSystem {
+          ${user} = nixpkgs.lib.nixosSystem {
               inherit system;
               specialArgs = {inherit user;};
               modules = [ ./configuration.nix 
@@ -31,7 +31,7 @@
               {home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {inherit user;};
-              home-manager.users.nomad = import ./modules/home.nix;
+              home-manager.users.${user} = import ./modules/home.nix;
               }
 ];
             };

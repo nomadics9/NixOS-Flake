@@ -32,7 +32,7 @@ First Install NixOS with any GUI you like to proceed from there<br>
 5. update and switch or boot the flake
     > nix flake update
     - switch or boot
-    > sudo nixos-rebuild switch --flake .#nomad
+    > sudo nixos-rebuild switch --flake .#YOURUSERNAME
 6. copy .config to ~/
     > cp -r .config ~/
 
