@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, lib, inputs, modulesPath, ... }:
 {
   # Include the results of the hardware scan.
@@ -12,24 +8,7 @@
 
 
 
-  #systemd = {
-  #  user.services.polkit-gnome-authentication-agent-1 = {
-  #    description = "polkit-gnome-authentication-agent-1";
-  #    wantedBy = [ "graphical-session.target" ];
-  #    wants = [ "graphical-session.target" ];
-  #    after = [ "graphical-session.target" ];
-  #    serviceConfig = {
-  #        Type = "simple";
-  #        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-  #        Restart = "on-failure";
-  #        RestartSec = 1;
-  #        TimeoutStopSec = 10;
-  #      };
-  #  };
-  #};
-
-
-  #fonts
+  # Fonts
     fonts.fonts = with pkgs; [
       font-awesome
      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Iosevka" ]; })
@@ -43,71 +22,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+
   # Define your hostname
   networking.hostName = "nixos";
-  # Enables wireless support via wpa_supplicant.
-  # networking.wireless.enable = true;  
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Enable networking
-  networking.networkmanager.enable = true;
-  
-  #Bluethooth
+  networking.networkmanager.enable = true; 
+  # Bluethooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Asia/Kuwait";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
-  };
-  
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable Gnome login
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
-  #services.xserver.displayManager.gdm.settings = {
-  #};
-
-  #sddm
-  #services.xserver.displayManager.sddm.enable = true;
-
-  #Flatpak
-  services.flatpak.enable = true;
-  #locate
-  services.locate.enable = true;
-
-  # Enable Xwayland
-  programs.xwayland.enable = true;             #enabled in flake
-  programs.hyprland.enable = true;             #enabled in flake.nix
-  programs.hyprland.nvidiaPatches = true;      #enabled in flake.nix
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -130,13 +52,57 @@
   };
 
 
+  # Set your time zone.
+  time.timeZone = "Asia/Kuwait";
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_GB.UTF-8";
+    LC_IDENTIFICATION = "en_GB.UTF-8";
+    LC_MEASUREMENT = "en_GB.UTF-8";
+    LC_MONETARY = "en_GB.UTF-8";
+    LC_NAME = "en_GB.UTF-8";
+    LC_NUMERIC = "en_GB.UTF-8";
+    LC_PAPER = "en_GB.UTF-8";
+    LC_TELEPHONE = "en_GB.UTF-8";
+    LC_TIME = "en_GB.UTF-8";
+  };
+  # Configure keymap in X11
+  services.xserver = {
+    layout = "us";
+    xkbVariant = "";
+  };
+
+#Services
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+  # Flatpak
+  services.flatpak.enable = true;
+  # locate
+  services.locate.enable = true;
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
+  #tlp
+  services.tlp.enable = true;
+  #upower dbus
+  services.upower.enable = true;
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "ondemand";
+ };
 
-  
-  #xdg
-  
-  #  xdg.portal = {
+
+#Display
+  # Enable Gnome login
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
+  #services.xserver.displayManager.gdm.settings = {
+  #};
+ 
+  #xdg  
+    #xdg.portal = {
     #  enable = true;
     #  extraPortals = with pkgs; [
     #    xdg-desktop-portal-wlr
@@ -160,20 +126,11 @@
     '';
 
 
-  #Services
-  #tlp
-  services.tlp.enable = true;
-
-  #upower dbus
-  services.upower.enable = true;
-
+#Nvidia
   #Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
-  #Nvidia
-  #services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.opengl.enable = true;
-  
+
+
   services.xserver = {
     videoDrivers = [ "nvidia" ];
 
@@ -203,19 +160,34 @@
     '';
   };
 
-
-
-  #Cuda
-  services.xmr-stak.cudaSupport = true;
-  
+  hardware.opengl.enable = true;
+  hardware.nvidia.nvidiaSettings = true;
+  hardware.nvidia.powerManagement.enable = true;
+  # Cuda
+  services.xmr-stak.cudaSupport = true; 
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   hardware.nvidia.modesetting.enable = true;
+  #Switch GPU
+  #services.switcherooControl.enable = true;
 
 
+  #hardware.nvidia.prime = {
+    # Sync Mode
+   # sync.enable = true;
+    # Offload Mode
+    #offload.enable = true;
 
+    # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+  #  nvidiaBusId = "PCI:1:0:0";
+
+    # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+  #  intelBusId = "PCI:0:2:0";
+  #};
+
+
+#SystemPackages
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -231,24 +203,11 @@
   ];
 
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
+#Firewall
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
     #For Chromecast from chrome
-#    networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
+    #networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
   # Or disable the firewall altogether.
    networking.firewall.enable = false;
 
