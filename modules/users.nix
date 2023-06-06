@@ -1,11 +1,14 @@
 { config, pkgs, lib, inputs, ... }:
+let
+ user = "nomad";
+in
 {
 
 
 # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nomad = {
+  users.users.${user} = {
     isNormalUser = true;
-    description = "nomad";
+    description = "${user}";
     extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
     packages = with pkgs; [
      neovim

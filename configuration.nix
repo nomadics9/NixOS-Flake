@@ -1,6 +1,9 @@
 { config, pkgs, lib, inputs, modulesPath, ... }:
+
 {
-  # Include the results of the hardware scan.
+
+
+# Include the results of the hardware scan.
     imports = [ ./hardware-configuration.nix 
     ./modules/vm.nix
     ./modules/shell.nix
@@ -30,7 +33,6 @@
   # Bluethooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;

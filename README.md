@@ -20,16 +20,18 @@ Added some more features in waybar
 Usage:
 
 1. clone
-   > gh repo clone nomadics9/NixOS-Flake
+    > gh repo clone nomadics9/NixOS-Flake
 2. cd to cloned dir 
 3. overwrite your ./hardware-configuration.nix from /etc/nixos/hardware-configuration.nix
-   > sudo cp ~/etc/nixos/hardware-configuration.nix .
-4. update and switch or boot the flake
-   > nix flake update
+    > sudo cp ~/etc/nixos/hardware-configuration.nix .
+4. change username to your user in <b>users.nix</b> & <b>home.nix</b>
+    > ![ScreenShot](https://i.ibb.co/VvwDffK/2023-06-06-T19-25-54-544297462-03-00.png)
+5. update and switch or boot the flake
+    > nix flake update
     - switch or boot
-   > sudo nixos-rebuild switch --flake .#nomad <---- change username in configuration.nix , flake.nix and home.nix
-5. copy .config to ~/
-   > cp -r .config ~/
+    > sudo nixos-rebuild switch --flake .#nomad
+6. copy .config to ~/
+    > cp -r .config ~/
 
 Extras:
 For GTK theming:<br>

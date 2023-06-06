@@ -1,10 +1,12 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, self, ... }:
+let
+ user = "nomad";
+in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "nomad";
-  home.homeDirectory = "/home/nomad";
+  home.username = "${user}";
+  home.homeDirectory = "/home/${user}";
 
 
   #Gtk 
