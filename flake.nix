@@ -10,6 +10,7 @@
 
   outputs = { self, nixpkgs, hyprland, home-manager, ... }: 
     let
+      user = "nomad";
       system = "x86_64-linux";
       pkgs = import nixpkgs {
        inherit system;
@@ -20,6 +21,7 @@
         nixosConfigurations = {
           nomad = nixpkgs.lib.nixosSystem {
               inherit system;
+              specialArgs = {inherit user;};
               modules = [ ./configuration.nix 
               hyprland.nixosModules.default
               {programs.hyprland.enable = true;
@@ -28,6 +30,7 @@
               home-manager.nixosModules.home-manager
               {home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {inherit user;};
               home-manager.users.nomad = import ./modules/home.nix;
               }
 ];

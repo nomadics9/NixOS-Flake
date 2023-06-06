@@ -1,7 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
-let
- user = "nomad";
-in
+{ config, pkgs, lib, inputs, user, ... }:
 {
 
 
