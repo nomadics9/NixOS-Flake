@@ -104,27 +104,27 @@
   #};
  
   #xdg  
-    #xdg.portal = {
-    #  enable = true;
-    #  extraPortals = with pkgs; [
-    #    xdg-desktop-portal-wlr
-  #  ];
-#  };
+    xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+    ];
 
   #  wlr = {
   #   enable = true;
   #  };
-#  };
+  };
 
   environment.etc."xdg/user-dirs.defaults".text= ''
-    DESKTOP=System/Desktop
-    DOWNLOAD=System/Downloads
-    TEMPLATES=System/Templates
-    PUBLICSHARE=System/Public
-    DOCUMENTS=System/Documents
-    MUSIC=Media/music
-    PICTURES=Media/photos
-    VIDEOS=Media/video 
+    DESKTOP=$HOME/Desktop
+    DOWNLOAD=$HOME/Downloads
+    TEMPLATES=$HOME/Templates
+    PUBLICSHARE=$HOME/Public
+    DOCUMENTS=$HOME/Documents
+    MUSIC=$HOME/music
+    PICTURES=$HOME/photos
+    VIDEOS=$HOME/video 
     '';
 
 
@@ -163,6 +163,8 @@
   };
 
   hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true;
   hardware.nvidia.nvidiaSettings = true;
   hardware.nvidia.powerManagement.enable = true;
   # Cuda
@@ -172,7 +174,7 @@
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   hardware.nvidia.modesetting.enable = true;
   #Switch GPU
-  #services.switcherooControl.enable = true;
+  services.switcherooControl.enable = true;
 
 
   #hardware.nvidia.prime = {
