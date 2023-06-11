@@ -1,5 +1,5 @@
 {
-    "height": 40, // Waybar height (to be removed for auto height)
+    "height": 20, // Waybar height (to be removed for auto height)
     "layer": "top", // Waybar at top layer
     "modules-left": ["custom/launcher","temperature", "cpu", "memory", "custom/weather", "wlr/workspaces"],
     "modules-center": ["mpris"],
@@ -48,7 +48,7 @@
         "device": "intel_backlight",
         "format": "{icon}",
         "tooltip": true,
-        "format-alt": "<small>Brightness {percent}%</small>",
+        "format-alt": "<small>{percent}%</small>",
         "format-icons": ["󱩎 ", "󱩏 ", "󱩐 ", "󱩑 ", "󱩒 ", "󱩓 ", "󱩔 ", "󱩕 ", "󱩖 ", "󰛨 "],
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-",
@@ -87,6 +87,7 @@
         "on-click": "pamixer -t",
         "on-scroll-up": "pamixer -i 1",
         "on-scroll-down": "pamixer -d 1",
+	"on-click-right": "exec pavucontrol",
         "tooltip-format" : "Volume {volume}%",
     },
 
@@ -109,7 +110,7 @@
       "format-full": "󰂄", 
  
 
-      "format-alt": "{icon}<small> {time}</small>",
+      "format-alt": "<small>{capacity}%</small> ",
       "format-full": "󰚥", 
       "format-icons": ["󱊡", "󱊢", "󱊣"]
     },
@@ -125,8 +126,8 @@
     },
     
       "mpris": {
-  	"format": "<small>{player_icon} {title}</small>",
-  	"format-paused": "<small> {status_icon} <i>{title}</i> </small>",
+  	"format": "{player_icon} {title}",
+  	"format-paused": " {status_icon} <i>{title}</i>",
   	"player-icons": {
   		"default": "▶",
   		"mpv": "🎵"
@@ -156,7 +157,7 @@
         "on-click": "rofi -show drun &",
     },
     "custom/wallpaper": {
-       "format": "💻",
+       "format": " 󰔉 ",
        "on-click": "bash ~/.config/waybar/scripts/changewallpaper.sh",
     } 
 }
