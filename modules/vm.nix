@@ -3,7 +3,7 @@
 {
 
   # Enable dconf (System Management Tool) enabled in users.nix
-  programs.dconf.enable = true;
+  #programs.dconf.enable = true;
 
   # Add user to libvirtd group
   users.users.${user}.extraGroups = [ "libvirtd" ];

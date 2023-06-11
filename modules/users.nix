@@ -76,7 +76,7 @@
   services.tumbler.enable = true;
 
   #gnome outside gnome
-  programs.dconf.enable = true;
+  programs.dconf.enable = lib.mkDefault true;
 
   #Steam
   programs.steam = {
@@ -84,16 +84,29 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
+  
+  #DIRS
+    environment.etc."xdg/user-dirs.defaults".text= ''
+    DESKTOP=$HOME/Desktop
+    DOWNLOAD=$HOME/Downloads
+    TEMPLATES=$HOME/Templates
+    PUBLICSHARE=$HOME/Public
+    DOCUMENTS=$HOME/Documents
+    MUSIC=$HOME/Music
+    PICTURES=$HOME/Photos
+    VIDEOS=$HOME/Video 
+    '';
+
 
    #Overlays
-   #Waybar wlr/Workspaces
+    #Waybar wlr/Workspaces
     nixpkgs.overlays = [
     (self: super: {
       waybar = super.waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
       });
     })
-  ];
+    ];
 
 
 }
