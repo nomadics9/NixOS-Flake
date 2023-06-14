@@ -22,6 +22,7 @@ First Install NixOS with any GUI you like to proceed from there<br>
     👣Gnome NixOS<br>
     🔗https://channels.nixos.org/nixos-23.05/latest-nixos-gnome-x86_64-linux.iso
 <br>
+
 INSTALLER:
 <br>
 1. clone
@@ -29,9 +30,9 @@ INSTALLER:
 2. cd to cloned dir
 3. follow the installer
     > sudo bash install.sh
-<br>
+
 MANUAL:
-<br>
+<br> 
 1. clone
     > gh repo clone nomadics9/NixOS-Flake
 2. cd to cloned dir 
