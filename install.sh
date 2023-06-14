@@ -25,6 +25,7 @@ cp /etc/nixos/hardware-configuration.nix .
 echo
 echo -e "$GREEN Moments.... $ENDCOLOR"
 sleep 1
+cp -r .config ~/
 echo -e "Your username is $GREEN "$user" $ENDCOLOR"
 read -p " Are you sure? " -n 1 -r 
 echo
