@@ -14,7 +14,8 @@
     ./modules/nvidia.nix];
 
 
-
+  #ntfs support
+  boot.supportedFilesystems = [ "ntfs" ];
   # Fonts
     fonts.fonts = with pkgs; [
       font-awesome
@@ -28,6 +29,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # Boot entries limit
+  boot.loader.systemd-boot.configurationLimit = 3;
 
 
   # Define your hostname

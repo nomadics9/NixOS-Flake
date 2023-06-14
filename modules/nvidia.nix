@@ -7,7 +7,7 @@
 
 
   services.xserver = {
-    videoDrivers = [ "modesetting" "nvidia" ];
+    videoDrivers = [ "nvidia" ];
 
     config = ''
       Section "Device"
@@ -26,12 +26,16 @@
           Driver "nvidia"
           BusID "PCI:1:0:0"
           Option "AllowEmptyInitialConfiguration"
+          Option         "TearFree" "true"
       EndSection
     '';
     screenSection = ''
       Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
       Option         "AllowIndirectGLXProtocol" "off"
       Option         "TripleBuffer" "on"
+      '';
+    deviceSection = '' 
+    Option "TearFree" "true"
     '';
   };
 
@@ -40,7 +44,7 @@
   hardware.opengl.driSupport32Bit = true;
   hardware.nvidia.nvidiaSettings = true;
   hardware.nvidia.powerManagement.enable = true;
-  #hardware.nvidia.forceFullCompositionPipeline = true;
+  hardware.nvidia.forceFullCompositionPipeline = true;
 
   # Cuda
   services.xmr-stak.cudaSupport = true; 
@@ -49,20 +53,20 @@
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   hardware.nvidia.modesetting.enable = true;
   #Switch GPU
-  services.switcherooControl.enable = true;
+  #services.switcherooControl.enable = true;
 
 
   #hardware.nvidia.prime = {
     # Sync Mode
-   # sync.enable = true;
+    #reverseSync.enable = true;
     # Offload Mode
     #offload.enable = true;
 
     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-  #  nvidiaBusId = "PCI:1:0:0";
+    #nvidiaBusId = "PCI:1:0:0";
 
     # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-  #  intelBusId = "PCI:0:2:0";
+    #intelBusId = "PCI:0:2:0";
   #};
 
 
