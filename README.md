@@ -13,7 +13,7 @@ NixOS with personal packages running on HyprlandWM + Waybar
 Added some more features in waybar
 ![ScreenShot](https://i.ibb.co/6HRpPHX/screenshot.jpg)
 
-[____________________![waybar hyprland](https://i.ibb.co/Wyz0765/youtube.png)](https://www.youtube.com/watch?v=PjE-PTNWwqs)____________________
+[____________![waybar hyprland](https://i.ibb.co/Wyz0765/youtube.png)](https://www.youtube.com/watch?v=PjE-PTNWwqs)
 
 
 
