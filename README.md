@@ -4,16 +4,16 @@ My NixOS Flake + dotfiles
 NixOS with personal packages running on HyprlandWM + Waybar
 
 
-![ScreenShot](https://i.ibb.co/zZbTRPp/2023-05-22-T23-05-36-798602415-03-00.png)
+![ScreenShot](https://i.ibb.co/26rqbc2/Untitled.png)
 
 ![ScreenShot](https://i.ibb.co/FHh8QZM/2023-05-22-T23-05-59-807197950-03-00.png)
 
-![ScreenShot](https://i.ibb.co/M9gs7n5/2023-05-22-T23-07-35-808155981-03-00.png)
+![ScreenShot](https://i.ibb.co/fDZ2hSk/Untitled1.png)
 
 Added some more features in waybar
 ![ScreenShot](https://i.ibb.co/6HRpPHX/screenshot.jpg)
 
-[![](https://markdown-videos.deta.dev/youtube/PjE-PTNWwqs)](https://youtu.be/PjE-PTNWwqs)
+[____________________![waybar hyprland](https://i.ibb.co/Wyz0765/youtube.png)](https://www.youtube.com/watch?v=PjE-PTNWwqs)____________________
 
 
 
