@@ -1,10 +1,8 @@
-{ lib, pkgs, config, ... }:
-with lib;
 let
-  # GTX 1070M
+  # NVIDIA
   gpuIDs = [
-    "10de:1ba1" # Graphics
-    "10de:10f0" # Audio
+    "10de:25a2" # Graphics
+    #"10de:10f0" # Audio
   ];
 in { pkgs, lib, config, ... }: {
   options.vfio.enable = with lib;

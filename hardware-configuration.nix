@@ -8,23 +8,28 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/20cf43bc-ed95-4c11-9c21-8e7c3426a002";
+    { device = "/dev/disk/by-uuid/6280ec59-29de-41f0-8bba-0cf79879d253";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/3952-1D80";
+    { device = "/dev/disk/by-uuid/58D9-1D76";
       fsType = "vfat";
     };
 
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/d8cc192f-564a-4cb5-b60d-d8ca3038dc6d";
+      fsType = "ext4";
+    };
+
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/ef97607b-18e8-4731-afda-0a64b03d63fc"; }
+    [ { device = "/dev/disk/by-uuid/3b826644-5864-4198-9c0b-bebe0159ba14"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -32,9 +37,13 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp0s13f0u1u1.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp0s20f0u6.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # high-resolution display
+ # hardware.video.hidpi.enable = lib.mkDefault true;
 }

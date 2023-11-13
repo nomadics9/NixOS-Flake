@@ -9,13 +9,13 @@
     extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
     packages = with pkgs; [
      neovim
-     google-chrome-beta
+     google-chrome
      swaylock-effects swayidle wlogout swaybg  #Login etc..  
      waybar                                    #topbar 
      wayland-protocols
      libsForQt5.qt5.qtwayland
-     kanshi                                    #laptop dncies
-     rofi mako rofimoji                        #Drawer + notifications
+     #rofi-wayland rofi-emoji
+     dunst #Drawer + notifications
      jellyfin-ffmpeg                           #multimedia libs
      viewnior                                  #image viewr
      pavucontrol                               #Volume control
@@ -59,7 +59,6 @@
      #########################
     ];
   };
-
   #swaylock pass verify
   security.pam.services.swaylock = {
     text = ''
@@ -110,3 +109,4 @@
 
 
 }
+

@@ -1,10 +1,14 @@
-{ config, pkgs, self, user, ... }:
+{ config, pkgs, self, user, gtk, ... }:
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
+  programs.home-manager.enable = true;
   home.username = "${user}";
   home.homeDirectory = "/home/${user}";
-
+  home.stateVersion = "23.05";
   #Gtk 
     gtk = {
       enable = true;
@@ -32,9 +36,24 @@
     
   };
 
+  #  home.packages = [                               
+  #  pkgs.rofi-wayland
+  #  pkgs.rofi-emoji
+  #];
+
+  #rofi
+  programs.rofi = {
+  package = pkgs.rofi-wayland;
+  enable = true;
+  plugins = [pkgs.rofi-emoji];
+  configPath = ".config/rofi/config.rasi";
+  theme = "spotlight-dark.rasi"; 
+};
+
+
   #Hyprland
     home.sessionVariables = {
-	    BROWSER = "google-chrome-beta";
+	    BROWSER = "google-chrome";
 	    TERMINAL = "kitty";
 	    NIXOS_OZONE_WL = "1";
 	    QT_QPA_PLATFORMTHEME = "gtk3";
@@ -47,7 +66,7 @@
 	    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
 	    WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
 	    WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line  
-	    # GBM_BACKEND = "nvidia-drm";
+	     GBM_BACKEND = "nvidia-drm";
 	    CLUTTER_BACKEND = "wayland";
 	    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
 	    LIBVA_DRIVER_NAME = "nvidia";
@@ -62,8 +81,8 @@
 	    XDG_CONFIG_HOME = "\${HOME}/.config";
 	    XDG_BIN_HOME = "\${HOME}/.local/bin";
 	    XDG_DATA_HOME = "\${HOME}/.local/share";
-    };
 
+    };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -73,8 +92,8 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "23.05";
+  #home.stateVersion = "23.05";
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  #programs.home-manager.enable = true;
 }

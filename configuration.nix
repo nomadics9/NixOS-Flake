@@ -7,22 +7,27 @@
   };
 
 # Include the results of the hardware scan.
-    imports = [ ./hardware-configuration.nix 
-    ./modules/vm.nix
+    imports = [ ./hardware-configuration.nix
+    ./modules/battery.nix
     ./modules/shell.nix
     ./modules/users.nix
-    ./modules/nvidia.nix];
+    ./modules/nvidia.nix
+    ];
 
+nixpkgs.config.allowUnfree = true; 
+#fix
+boot.kernelParams = [ "intel_pstate=active" ];
 
   #ntfs support
   boot.supportedFilesystems = [ "ntfs" ];
   # Fonts
-    fonts.fonts = with pkgs; [
+    fonts.packages = with pkgs; [
       font-awesome
-     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Iosevka" ]; })
+      noto-fonts-emoji
+     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Iosevka"  ]; })
      ];
   #emojis
-    #services.gollum.emoji = true;
+    services.gollum.emoji = true;
 
 
   # Bootloader.
@@ -77,11 +82,16 @@
     LC_TIME = "en_GB.UTF-8";
   };
   # Configure keymap in X11
+#  services.xserver = {
+#    layout = "us";
+#    xkbVariant = "";
+#  };
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+        exportConfiguration = true; # link /usr/share/X11/ properly
+        layout = "us,ara";
+        xkbOptions = "grp:alt_shift_toggle";
+        xkbVariant = "qwerty_digits";
   };
-
   #Services
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -94,16 +104,18 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
   services.xserver.libinput.touchpad.tapping = true; #tap
+  
+  #in Battery Module
   # Do nothing if AC on
-  services.logind.lidSwitchExternalPower = "ignore";
+  #services.logind.lidSwitchExternalPower = "ignore";
   #tlp
-  services.tlp.enable = true;
+  #services.tlp.enable = true;
   #upower dbus
-  services.upower.enable = true;
-  powerManagement = {
-    enable = true;
-    cpuFreqGovernor = "ondemand";
- };
+  #services.upower.enable = true;
+  #powerManagement = {
+  #  enable = true;
+  #  cpuFreqGovernor = "ondemand";
+# };
 
 
   #Display
@@ -119,16 +131,21 @@
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
         #xdg-desktop-portal-hyprland
-        xdg-desktop-portal-wlr
+        #xdg-desktop-portal-wlr
     ];
-    wlr.enable = true;
+    #wlr.enable = true;
   };
 
 
   #SystemPackages
+  nix = {
+  package = pkgs.nixFlakes;
+  extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+};
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
  # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      vim
@@ -138,8 +155,9 @@
      git
      neofetch
      gh
-  ];
+ ];
 
+  
 
   #Firewall
   # Open ports in the firewall.

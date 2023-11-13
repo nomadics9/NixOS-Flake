@@ -1,20 +1,34 @@
 {
     "height": 20, // Waybar height (to be removed for auto height)
     "layer": "top", // Waybar at top layer
-    "modules-left": ["custom/launcher","temperature", "cpu", "memory", "custom/weather", "wlr/workspaces"],
+    "modules-left": ["custom/launcher", "cpu", "memory", "custom/weather", "hyprland/workspaces"],
     "modules-center": ["mpris"],
-    "modules-right": [ "network", "pulseaudio",  "backlight", "battery", "clock", "custom/wallpaper","tray","custom/power-menu"],
-    "wlr/workspaces": {
-      "format": "{icon}",
+    "modules-right": ["network", "pulseaudio",  "backlight", "battery", "clock", "custom/wallpaper","tray","hyprland/language"],
+    "hyprland/workspaces": {
+      "format": "{name}",
       "all-outputs": true,
       "on-click": "activate",
       "format-icons": {
-        "active": " 󰮯",
-        "default": "󰌽",
+        "active": " 󱎴",
+        "default": "󰍹",
+      },
+      "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": [],
+      "8": [],
+      "9": [],
       }
     },
+    "hyprland/language": {
+        "format": "{short}",
+     },
     "hyprland/window": {
-        "format": "{}"
+        "format": "{}",
         
     },
     "tray": {
@@ -41,7 +55,6 @@
     "temperature": {
         "interval": 10,
         "format": " {temperatureC}°C",
-        "format-alt":"temprature",
         "max-length": 10,
     },
     "backlight": {
@@ -66,6 +79,7 @@
         "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
         
     },
+
            "bluetooth": {
                 "format": "{icon}",
                 "format-alt": "bluetooth: {status}",
@@ -96,7 +110,7 @@
       "adapter": "ADP0",
       "interval": 60,
       "states": {
-          "warning": 30,
+          "warning": 20,
           "critical": 15
       },
       "max-length": 20,
@@ -128,6 +142,7 @@
       "mpris": {
   	"format": "{player_icon} {title}",
   	"format-paused": " {status_icon} <i>{title}</i>",
+    "max-length": 40,
   	"player-icons": {
   		"default": "▶",
   		"mpv": "🎵"

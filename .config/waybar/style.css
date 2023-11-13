@@ -1,6 +1,6 @@
 * {
   /* `otf-font-awesome` is required to be installed for icons */
-  font-family: Material Design Icons, JetBrainsMono Nerd Font, Iosevka Nerd Font;
+  font-family: Material Design Icons, JetBrainsMono Nerd Font, Iosevka Nerd Font ;
   font-size: 14px;
   border: none;
   border-radius: 0;
@@ -32,6 +32,7 @@ window#waybar.hidden {
 #mode,
 #custom-lock,
 #workspaces,
+#language,
 #idle_inhibitor,
 #custom-wallpaper, 
 #custom-power-menu,
@@ -243,6 +244,13 @@ window#waybar.hidden {
   margin-top: 7px;
   margin-bottom: 7px;
 }
+#language {
+  color: #8a909e;
+  font-family: Iosevka Nerd Font;
+  font-weight: bold;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
 
 #custom-power-menu {
   color: #e78284;
@@ -340,3 +348,5 @@ label:focus {
   padding-right: 5;
   padding-left: 0;
 }
+
+

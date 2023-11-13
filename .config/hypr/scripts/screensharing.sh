@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
-sleep 3
+sleep 1
 killall xdg-desktop-portal-hyprland
 killall xdg-desktop-portal-wlr
 killall xdg-desktop-portal
-/nix/store/n1pjbdxr0jiglz5flxqa20ddf4iysda3-xdg-desktop-portal-hyprland-0.pre+date=2023-05-29_4d9ff0c/libexec/xdg-desktop-portal-hyprland &
-sleep 4
-/nix/store/yxxws6k59w5khkpqqpyvcl6pk65q0hzl-xdg-desktop-portal-1.16.0/libexec/xdg-desktop-portal &
-
-
-
-
-
-
+/nix/store/fgw6w4r8wq6jwr4ikgwby6gfmdfyn2gi-xdg-desktop-portal-hyprland-1.2.3+date=2023-10-22_22e7a65/libexec/xdg-desktop-portal-hyprland-1.2.3+date=2023-10-22_22e7a65/libexec/xdg-desktop-portal-hyprland &
+sleep 2
+/nix/store/vcvfsslah74q4850nhx10qd3i93pl23h-xdg-desktop-portal-1.16.0/libexec/xdg-desktop-portal&

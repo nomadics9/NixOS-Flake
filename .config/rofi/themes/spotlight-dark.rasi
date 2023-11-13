@@ -32,7 +32,7 @@ window {
 }
 
 inputbar {
-    font:       "JetBrainsMono 12";
+    font:       "JetBrainsMono 16";
     padding:    12px;
     spacing:    12px;
     children:   [ icon-search, entry ];
@@ -40,8 +40,8 @@ inputbar {
 
 icon-search {
     expand:     false;
-    filename:   "network";
-    size: 12px;
+    filename:   "search";
+    size: 20px;
 }
 
 icon-search, entry, element-icon, element-text {
@@ -51,7 +51,7 @@ icon-search, entry, element-icon, element-text {
 entry {
     font:   inherit;
 
-    placeholder         : "SSID";
+    placeholder         : "Search";
     placeholder-color   : @fg2;
 }
 
@@ -96,36 +96,3 @@ element-icon {
 element-text {
     text-color: inherit;
 }
-
-/*****----- Main Window -----*****/
-window {
-    /* properties for window widget */
-    transparency:                "real";
-    location:                    north east;
-    anchor:                      north east;
-    fullscreen:                  false;
-    width:                       400px;
-    x-offset:                    0px;
-    y-offset:                    0px;
-
-    /* properties for all widgets */
-    enabled:                     true;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               10px;
-    cursor:                      "default";
-    /* Backgroud Colors */
-    background-color:            @bg0; 
-   /* Backgroud Image */
-    //background-image:          url("/path/to/image.png", none);
-    /* Simple Linear Gradient */
-    //background-image:          linear-gradient(red, orange, pink, purple);
-    /* Directional Linear Gradient */
-    //background-image:          linear-gradient(to bottom, pink, yellow, magenta);
-    /* Angle Linear Gradient */
-    //background-image:          linear-gradient(45, cyan, purple, indigo);
-}
-
-
-

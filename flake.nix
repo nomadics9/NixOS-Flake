@@ -27,7 +27,7 @@
             hyprland.nixosModules.default
             {
               programs.hyprland.enable = true;
-              programs.hyprland.nvidiaPatches=true;
+              programs.hyprland.enableNvidiaPatches=true;
               programs.hyprland.xwayland.enable=true;
             }
             home-manager.nixosModules.home-manager

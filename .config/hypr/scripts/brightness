@@ -1,15 +1,15 @@
 #!/bin/sh
 
 down() {
-brillo -u 150000 -U 2
-brightness=$(light -g)
-dunstify -a "BRIGHTNESS" "Decreasing to $brightness%" -h int:value:"$brightness" -i ~/.config/dunst/assets/ui/brightness-low.svg -r 2593 -u normal
+brightnessctl set 5%-
+brightnessctl=$(brightnessctl | grep -oP "(\d+(\.\d+)?(?=%))")
+dunstify -a "Brightness" "Decreasing to $brightnessctl%" -h int:value:"$brightnessctl" -i ~/icons/brightness.png -r 2593 -u normal
 }
 
 up() {
-brillo -u 150000 -A 2
-brightness=$(light -g)
-dunstify -a "BRIGHTNESS" "Increasing to $brightness%" -h int:value:"$brightness" -i ~/.config/dunst/assets/ui/brightness-high.svg -r 2593 -u normal
+brightnessctl set 5%+
+brightnessctl=$(brightnessctl | grep -oP "(\d+(\.\d+)?(?=%))")
+dunstify -a "BRightness" "Increasing to $brightnessctl%" -h int:value:"$brightnessctl" -i ~/icons/brightness.png -r 2593 -u normal
 }
 
 case "$1" in

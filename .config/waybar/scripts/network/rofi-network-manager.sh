@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Default Values
-LOCATION=0
+LOCATION=3
 QRCODE_LOCATION=$LOCATION
 Y_AXIS=0
 X_AXIS=0
