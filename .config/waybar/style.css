@@ -88,7 +88,10 @@ window#waybar.hidden {
 #workspaces button.active {
   color: #ecd3a0;
   padding-left: 1px;
-  padding-right: 12px;
+  padding-right: 5px;
+  font-family: Iosevka Nerd Font;
+  font-weight: bold;
+  font-size: 12px;
   margin-left: 0em;
   margin-right: 0em;
   transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.68);
@@ -236,7 +239,6 @@ window#waybar.hidden {
   margin-top: 7px;
   margin-bottom: 7px;
 }
-
 #clock {
   color: #8a909e;
   font-family: Iosevka Nerd Font;
@@ -282,6 +284,7 @@ label:focus {
   margin-top: 7px;
   margin-bottom: 7px;
   font-size: 30px;
+
 }
 
 #tray > .passive {
@@ -343,10 +346,8 @@ label:focus {
   color: #dbd9d8;
 }
 
-#custom-wallpaper {
+*#custom-wallpaper {
   color: #dbd9d8;
-  padding-right: 5;
-  padding-left: 0;
+  padding-right: 7;
+  padding-left: 7;
 }
-
-
