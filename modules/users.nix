@@ -9,7 +9,7 @@
     extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
     packages = with pkgs; [
      neovim
-     google-chrome
+     firefox-wayland
      swaylock-effects swayidle wlogout swaybg  #Login etc..  
      waybar                                    #topbar 
      wayland-protocols
@@ -49,14 +49,8 @@
      libnotify
      poweralertd
      dbus
-     #gsettings-desktop-schemas
-     #wrapGAppsHook
-     #xdg-desktop-portal-hyprland
-     ####photoshop dencies####
-     gnome.zenity
-     wine64Packages.waylandFull
-     curl
-     #########################
+     xdg-utils
+     wrapGAppsHook
     ];
   };
   #swaylock pass verify
@@ -99,14 +93,26 @@
 
    #Overlays
     #Waybar wlr/Workspaces
-    nixpkgs.overlays = [
-    (self: super: {
-      waybar = super.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      });
-    })
+    #nixpkgs.overlays = [
+    #(self: super: {
+    #  waybar = super.waybar.overrideAttrs (oldAttrs: {
+    #    mesonFlags = oldAttrs.mesonFlags ++ [ "-experimental=true" ];
+    #  });
+    #})
+    #];
+
+    nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiVdpau
+      libvdpau-va-gl
     ];
-
-
+    };
+ 
 }
 

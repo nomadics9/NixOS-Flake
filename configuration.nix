@@ -14,7 +14,8 @@
     ./modules/nvidia.nix
     ];
 
-nixpkgs.config.allowUnfree = true; 
+nixpkgs.config.allowUnfree = true;
+#nixpkgs.config.chromium.enablePepperFlash = true;
 #fix
 boot.kernelParams = [ "intel_pstate=active" ];
 
