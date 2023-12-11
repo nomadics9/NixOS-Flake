@@ -32,10 +32,7 @@ window#waybar.hidden {
 #mode,
 #custom-lock,
 #workspaces,
-#language,
 #idle_inhibitor,
-#custom-wallpaper, 
-#custom-power-menu,
 #custom-launcher,
 #custom-spotify,
 #custom-weather,
@@ -250,15 +247,39 @@ window#waybar.hidden {
   color: #8a909e;
   font-family: Iosevka Nerd Font;
   font-weight: bold;
+  border-radius : 8px 0 0 8px;
   margin-top: 7px;
   margin-bottom: 7px;
 }
 
 #custom-power-menu {
-  color: #e78284;
+  color: #8a909e;
   margin-right: 12px;
   border-radius: 8px;
   padding: 0 6px 0 6.8px;
+  border-radius: 0 8px 8px 0;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+#custom-wallpaper {
+  color: #8a909e;
+  padding-right: 7;
+  padding-left: 7;
+}
+#custom-wallpaper,
+#language,
+#custom-power-menu {
+  background-color: #252733;
+  padding: 0em 2em;
+
+  font-size: 17px;
+
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+
+  padding-top: 3px;
+  padding-bottom: 3px;
+
   margin-top: 7px;
   margin-bottom: 7px;
 }
@@ -346,8 +367,4 @@ label:focus {
   color: #dbd9d8;
 }
 
-*#custom-wallpaper {
-  color: #dbd9d8;
-  padding-right: 7;
-  padding-left: 7;
-}
+

@@ -3,14 +3,14 @@
     "layer": "top", // Waybar at top layer
     "modules-left": ["custom/launcher", "cpu", "memory", "custom/weather", "hyprland/workspaces"],
     "modules-center": ["mpris"],
-    "modules-right": ["network", "pulseaudio",  "backlight", "battery", "clock", "custom/wallpaper","tray","hyprland/language"],
+    "modules-right": ["network", "pulseaudio",  "backlight", "battery", "clock","tray","hyprland/language","custom/wallpaper","custom/power-menu"],
     "hyprland/workspaces": {
       "format": "{name}",
       "all-outputs": true,
       "on-click": "activate",
       "format-icons": {
         "active": " 󱎴",
-        "default": "󰍹",
+        "default": "󰍹"
       },
       "persistent-workspaces": {
       "1": [],
@@ -21,15 +21,16 @@
       "6": [],
       "7": [],
       "8": [],
-      "9": [],
+      "9": []
       }
     },
     "hyprland/language": {
-        "format": "{short}",
+        "format": "{short}"
      },
+
     "hyprland/window": {
-        "format": "{}",
-        
+    "max-length": 200,
+    "separate-outputs": true
     },
     "tray": {
         "spacing": 10
@@ -37,25 +38,25 @@
     "clock": {
         "format": "{:%H:%M}",
         "format-alt": "{:%b %d %Y}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
     "cpu": {
       "interval": 10,
       "format": "  {}%",
       "max-length": 10,
-      "on-click": "",
+      "on-click": ""
     },
     "memory": {
         "interval": 30,
         "format": " {}%",
         "format-alt":" {used:0.1f}GB",
-        "max-length": 10,
+        "max-length": 10
     },
     "temperature": {
         "interval": 10,
         "format": " {temperatureC}°C",
-        "max-length": 10,
+        "max-length": 10
     },
     "backlight": {
         "device": "intel_backlight",
@@ -66,7 +67,7 @@
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-",
         "smooth-scrolling-threshold": "2400",
-	"tooltip-format" : "Brightness {percent}%",
+	"tooltip-format" : "Brightness {percent}%"
     },
     "network": {
         /* "format-wifi": "直", */
@@ -78,7 +79,7 @@
         "tooltip-format": "{essid}",
         "interval": 1,
         "on-click": "~/.config/waybar/scripts/network/rofi-network-manager.sh",
-        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"]
         
     },
 
@@ -104,7 +105,7 @@
         "on-scroll-up": "pamixer -i 1",
         "on-scroll-down": "pamixer -d 1",
 	"on-click-right": "exec pavucontrol",
-        "tooltip-format" : "Volume {volume}%",
+        "tooltip-format" : "Volume {volume}%"
     },
 
     "battery": {
@@ -133,25 +134,25 @@
     "custom/weather": {
       "exec": "nix-shell ~/.config/waybar/scripts/weather.py",
       "restart-interval": 300,
-      "return-type": "json",
+      "return-type": "json"
     },   
    "custom/lock": {
        "tooltip" : false,
        "on-click": "swaylock",
-       "format" : "",
+       "format" : ""
     },
     
       "mpris": {
   	"format": "{player_icon} {title}",
   	"format-paused": " {status_icon} <i>{title}</i>",
-    "max-length": 40,
+    "max-length": 80,
   	"player-icons": {
   		"default": "▶",
   		"mpv": "🎵"
   	},
   	"status-icons": {
   		"paused": "⏸"
-  	},
+  	}
   	// "ignored-players": ["firefox"]
   },
         
@@ -163,18 +164,22 @@
         "return-type": "json",
         "on-click": "playerctl play-pause",
         "on-double-click-right": "playerctl next",
-        "on-scroll-down": "playerctl previous",
+        "on-scroll-down": "playerctl previous"
     },
     "custom/power-menu": {
-        "format": " ⏻ ",
-        "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh &",
+        "format": "{percentage}Hz",
+        "on-click": "~/.config/hypr/scripts/screenHz.sh",
+        "return-type":"json",
+        "exec": "cat ~/.config/hypr/scripts/hz.json",
+        "interval":1,
+        "tooltip": false
     }, 
     "custom/launcher": {
         "format": "󱄅",
-        "on-click": "rofi -show drun &",
+        "on-click": "rofi -show drun &"
     },
     "custom/wallpaper": {
-       "format": "💻",
-       "on-click": "bash ~/.config/waybar/scripts/changewallpaper.sh",
-    } 
-}
+       "format": "󰸉",
+       "on-click": "bash ~/.config/waybar/scripts/changewallpaper.sh"
+    }
+   }

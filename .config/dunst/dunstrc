@@ -75,7 +75,7 @@
     #  %% Literal %
 
     markup = full
-    format = "<b>%a</b>\n%s"
+    format = "<b>%a</b>\n%b\n%s"
 
     # Left align the text
     alignment = left
@@ -96,7 +96,7 @@
     ignore_newline = no
 
     # Don't stack together notifications
-    stack_duplicates = false
+    stack_duplicates = true
 
     # Hide the count of stacked notifications
     # hide_duplicate_count = false
@@ -133,7 +133,7 @@
     dmenu = /usr/bin/dmenu -p dunst:
 
     # Browser for opening urls in context menu.
-    browser = /usr/bin/firefox -new-tab
+    browser = google-chrome-stable -new-tab
 
     # Always run rule-defined scripts, even if the notification is suppressed
     always_run_script = false
@@ -159,8 +159,8 @@
 
     # --- Mouse --- #
     mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
-    mouse_right_click = close_all
+    mouse_middle_click = close_all, close_current
+    mouse_right_click = do_action
 
 
 [experimental]
@@ -174,7 +174,7 @@
     timeout = 8
 
 [urgency_normal]
-    background = "#26292edd"
+    background = "#26292e"
     highlight = "#5ca1ff"
 
     frame_color = "#272f57"

@@ -1,12 +1,12 @@
 /*******************************************************************************
- * ROFI VERTICAL THEME USING THE NORD COLOR PALETTE 
+ * ROFI ONELINE THEME USING THE NORD COLOR PALETTE 
  * User                 : LR-Tech               
  * Theme Repo           : https://github.com/lr-tech/rofi-themes-collection
  * Nord Project Repo    : https://github.com/arcticicestudio/nord
  *******************************************************************************/
 
 * {
-    font:   "IBM Plex Mono 12";
+    font:   "Unifont 14";
 
     nord0:     #2e3440;
     nord1:     #3b4252;
@@ -38,21 +38,31 @@
 }
 
 window {
+    location:           south;
+    width:              100%;
     background-color:   @nord0;
-    border-color:       @accent-color;
+    children:           [ mainbox,message ];
+}
 
-    location:   center;
-    width:      480px;
-    border:     1px;
+mainbox {
+    orientation:    horizontal;
+    children:       [ inputbar,listview ];
 }
 
 inputbar {
-    padding:    8px 12px;
-    spacing:    12px;
-    children:   [ prompt, entry ];
+    width:      15%;
+    padding:    1px 8px;
+    spacing:    8px;
+    children:   [ icon-search, entry ];
 }
 
-prompt, entry, element-text, element-icon {
+icon-search {
+    expand:     false;
+    filename:   "search";
+    size: 16px;
+}
+
+prompt, element-icon ,entry, element-text,{
     vertical-align: 0.5;
 }
 
@@ -61,15 +71,12 @@ prompt {
 }
 
 listview {
-    lines:      8;
-    columns:    1;
-
-    fixed-height:   false;
+    layout: horizontal;
 }
 
 element {
-    padding:    8px;
-    spacing:    8px;
+    padding:    1px 8px;
+    spacing:    4px;
 }
 
 element normal urgent {
