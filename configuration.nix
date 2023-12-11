@@ -8,16 +8,19 @@
 
 # Include the results of the hardware scan.
     imports = [ ./hardware-configuration.nix
-    ./modules/battery.nix
-    ./modules/shell.nix
-    ./modules/users.nix
-    ./modules/nvidia.nix
+    ./modules/nixos/battery.nix
+    ./modules/nixos/shell.nix
+    ./modules/nixos/users.nix
+    ./modules/nixos/nvidia.nix
     ];
+#TEMP
+xdg.portal.config.common.default = "*";
+
 
 nixpkgs.config.allowUnfree = true;
 #nixpkgs.config.chromium.enablePepperFlash = true;
 #fix
-boot.kernelParams = [ "intel_pstate=active" ];
+#boot.kernelParams = [ "intel_pstate=active" ];
 
   #ntfs support
   boot.supportedFilesystems = [ "ntfs" ];
@@ -106,35 +109,40 @@ boot.kernelParams = [ "intel_pstate=active" ];
   services.xserver.libinput.enable = true;
   services.xserver.libinput.touchpad.tapping = true; #tap
   
-  #in Battery Module
-  # Do nothing if AC on
-  #services.logind.lidSwitchExternalPower = "ignore";
-  #tlp
-  #services.tlp.enable = true;
-  #upower dbus
-  #services.upower.enable = true;
-  #powerManagement = {
-  #  enable = true;
-  #  cpuFreqGovernor = "ondemand";
-# };
-
-
   #Display
   # Enable Gnome login
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
   #services.xserver.displayManager.gdm.settings = {};
+
+  #polkit Auth Agent
+  systemd = {
+  user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+  };
+};
  
   #xdg  
     xdg.portal = {
       enable = true;
-      xdgOpenUsePortal = true;
+      xdgOpenUsePortal = false;
+      #gtkUsePortal = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
         #xdg-desktop-portal-hyprland
         #xdg-desktop-portal-wlr
     ];
-    #wlr.enable = true;
+    wlr.enable = true;
   };
 
 
@@ -153,8 +161,8 @@ boot.kernelParams = [ "intel_pstate=active" ];
      zig
      wget
      killall
-     git
      neofetch
+     git
      gh
  ];
 
@@ -166,7 +174,7 @@ boot.kernelParams = [ "intel_pstate=active" ];
     #For Chromecast from chrome
     #networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
   # Or disable the firewall altogether.
-   networking.firewall.enable = false;
+   #networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

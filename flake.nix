@@ -22,12 +22,12 @@
         ${user} = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {inherit user;};
-          modules = [ ./configuration.nix 
+          modules = [ ./configuration.nix
               
             hyprland.nixosModules.default
             {
               programs.hyprland.enable = true;
-              programs.hyprland.enableNvidiaPatches=true;
+              #programs.hyprland.enableNvidiaPatches=true; #no longer needed
               programs.hyprland.xwayland.enable=true;
             }
             home-manager.nixosModules.home-manager
@@ -35,13 +35,14 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {inherit user;};
-              home-manager.users.${user} = import ./modules/home.nix;
+              home-manager.users.${user} = import ./modules/home/home.nix;
             }
           ];
         };
       };
     };
-  }
+}
+
 
 #nixos-22.11
 
