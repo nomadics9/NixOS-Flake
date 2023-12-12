@@ -5,7 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hyprland.url = "github:hyprwm/Hyprland";
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";   };
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";   
+    };
 
 
   outputs = { self, nixpkgs, hyprland, home-manager, ... }: 
@@ -19,7 +20,7 @@
       lib = nixpkgs.lib;
     in {
       nixosConfigurations = {
-        ${user} = nixpkgs.lib.nixosSystem {
+        hyprland = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {inherit user;};
           modules = [ ./configuration.nix
@@ -39,7 +40,23 @@
             }
           ];
         };
+        gnome = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {inherit user;};
+          modules = [ ./hosts/gnome/configuration.nix
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {inherit user;};
+              home-manager.users.${user} = import ./modules/home/home.nix;
+            }
+          ];
       };
+
+      };
+
     };
 }
 

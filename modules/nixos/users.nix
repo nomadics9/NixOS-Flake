@@ -7,6 +7,7 @@
     isNormalUser = true;
     description = "${user}";
     extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" "docker" ];
+    packages = with pkgs; [xdg-utils];
  };
   # #swaylock pass verify
   security.pam.services.swaylock = {
@@ -28,7 +29,7 @@
   services.tumbler.enable = true;
 
   #gnome outside gnome
-  #programs.dconf.enable = lib.mkDefault true;
+  programs.dconf.enable = lib.mkDefault true;
 
   # #Steam
    programs.steam = {
@@ -48,6 +49,8 @@
     PICTURES=$HOME/Photos
     VIDEOS=$HOME/Video 
     '';
+
+
 
 
    #Overlays

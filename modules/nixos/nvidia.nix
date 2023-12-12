@@ -37,24 +37,28 @@
  #   Option "TearFree" "true"
  #   '';
   };
+
+
+
   hardware = {
   opengl.enable = true;
   opengl.driSupport = true;
   opengl.driSupport32Bit = true;
-  # opengl = {
-  #    extraPackages = with pkgs; [
-  #      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-  #      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-  #      vaapiVdpau
-  #      libvdpau-va-gl
-  #    ];
-  # };
+   opengl = {
+      extraPackages = with pkgs; [
+        intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        vaapiVdpau
+        libvdpau-va-gl
+        mesa.drivers
+      ];
+   };
   
   nvidia.nvidiaSettings = true;
   nvidia.powerManagement.enable = true;
   nvidia.powerManagement.finegrained = true;
 
-  nvidia.forceFullCompositionPipeline = true;
+  #nvidia.forceFullCompositionPipeline = true;
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   nvidia.modesetting.enable = true;
 
