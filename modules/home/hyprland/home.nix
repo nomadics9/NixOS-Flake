@@ -86,18 +86,6 @@ in
     # ];
     # };
     
-  #DIRS
-    # environment.etc."xdg/user-dirs.defaults".text= ''
-    # DESKTOP=$HOME/Desktop
-    # DOWNLOAD=$HOME/Downloads
-    # TEMPLATES=$HOME/Templates
-    # PUBLICSHARE=$HOME/Public
-    # DOCUMENTS=$HOME/Documents
-    # MUSIC=$HOME/Music
-    # PICTURES=$HOME/Photos
-    # VIDEOS=$HOME/Video 
-    # '';
-
   home.packages = with pkgs; [
      neovim
      firefox-wayland
@@ -140,7 +128,7 @@ in
      libnotify
      poweralertd
      dbus
-     #wrapGAppsHook
+     wrapGAppsHook
      cudatoolkit
      ###apps###
      discord
@@ -160,7 +148,7 @@ in
 	     QT_QPA_PLATFORM = "wayland-egl";
 	     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
 	     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-	     #WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+	     WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
 	     #WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line  
 	     GBM_BACKEND = "nvidia-drm";
 	     CLUTTER_BACKEND = "wayland";
