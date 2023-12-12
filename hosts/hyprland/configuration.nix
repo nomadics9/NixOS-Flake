@@ -9,7 +9,7 @@
   # Include the results of the hardware scan.
     imports = [ ./hardware-configuration.nix
                 ./../../modules/nixos/battery.nix
-                ./../../modules/nixos/shell.nix
+               # ./../../modules/nixos/shell.nix
                 ./../../modules/nixos/users.nix
                 ./../../modules/nixos/nvidia.nix
     ];

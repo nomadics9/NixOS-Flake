@@ -36,7 +36,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {inherit user;};
-              home-manager.users.${user} = import ./modules/home/home.nix;
+              home-manager.users.${user} = import ./modules/home/hyprland/home.nix;
             }
           ];
         };
@@ -50,7 +50,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {inherit user;};
-              home-manager.users.${user} = import ./modules/home/home.nix;
+              home-manager.users.${user} = import ./modules/home/gnome/home.nix;
             }
           ];
       };

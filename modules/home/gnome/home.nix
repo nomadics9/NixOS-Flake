@@ -1,5 +1,23 @@
-{ config, pkgs, user, ... }:
+{ config, pkgs, user, home-manager, ... }:
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in
 {
+
+  programs.bash = {
+  enable = true;
+  shellAliases = {
+    switchhypr = "sudo nixos-rebuild switch --flake .#hyprland";
+    switchuhypr = "sudo nixos-rebuild switch --upgrade --flake .#hyprland";
+    switchgnome = "sudo nixos-rebuild switch --flake .#gnome";
+    switchugnome = "sudo nixos-rebuild switch --upgrade --flake .#gnome";
+    clean = "sudo nix-collect-garbage -d";
+    cleanold = "sudo nix-collect-garbage --delete-old";
+    cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
+    };
+  };
+  #starship
+    programs.starship.enable = true;
 
   # Allow "unfree" licenced packages
   nixpkgs.config = { allowUnfree = true; };
@@ -37,13 +55,13 @@
     #};
     
   };
-
   #gnome outside gnome
   dconf = {
     enable = true;
     settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
+	theme = "Juno";
       };
     };
   };
@@ -58,7 +76,7 @@
   };
 
   #thunar
-    # programs.xfce.thunar = {
+    # programs.thunar = {
     #   package = pkgs.xfce.thunar;
     #   enable = true;
     #   plugins = with pkgs.xfce; [
@@ -128,18 +146,18 @@
      discord
   ];
 
-  #Hyprland
+  #Session variables
      home.sessionVariables = {
 	     BROWSER = "firefox";
 	     EDITOR = "neovim";
 	     TERMINAL = "kitty";
-	     NIXOS_OZONE_WL = "1";
+	     #NIXOS_OZONE_WL = "1";
 	     QT_QPA_PLATFORMTHEME = "gtk3";
 	     QT_SCALE_FACTOR = "1";
-	     MOZ_ENABLE_WAYLAND = "1";
-	     SDL_VIDEODRIVER = "wayland";
-	     _JAVA_AWT_WM_NONREPARENTING = "1";
-	     QT_QPA_PLATFORM = "wayland-egl";
+	     #MOZ_ENABLE_WAYLAND = "1";
+	     #SDL_VIDEODRIVER = "wayland";
+	     #_JAVA_AWT_WM_NONREPARENTING = "1";
+	     #QT_QPA_PLATFORM = "wayland-egl";
 	     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
 	     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
 	     WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
@@ -150,15 +168,14 @@
 	     LIBVA_DRIVER_NAME = "nvidia";
 	     WLR_RENDERER = "vulkan";
 	     __NV_PRIME_RENDER_OFFLOAD="1"; 
-	     __VK_LAYER_NV_optimus="NVIDIA_only";
-	     XDG_CURRENT_DESKTOP = "Hyprland";
-	     XDG_SESSION_DESKTOP = "Hyprland";
-	     XDG_SESSION_TYPE = "wayland";
-	     GTK_USE_PORTAL = "1";
-	     NIXOS_XDG_OPEN_USE_PORTAL = "1";
+	     XDG_CURRENT_DESKTOP = "gnome";
+	     XDG_SESSION_DESKTOP = "gnome";
+	     #XDG_SESSION_TYPE = "wayland";
+	     #GTK_USE_PORTAL = "1";
+	     #NIXOS_XDG_OPEN_USE_PORTAL = "1";
 	     XDG_CACHE_HOME = "\${HOME}/.cache";
 	     XDG_CONFIG_HOME = "\${HOME}/.config";
-	     XDG_BIN_HOME = "\${HOME}/.local/bin";
+	     #XDG_BIN_HOME = "\${HOME}/.local/bin";
 	     XDG_DATA_HOME = "\${HOME}/.local/share";
 
     };
@@ -174,4 +191,5 @@
 
   # Let Home Manager install and manage itself.
   #programs.home-manager.enable = true;
+
 }
