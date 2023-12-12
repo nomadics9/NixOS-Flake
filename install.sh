@@ -29,12 +29,22 @@ cp -r .config ~/
 echo -e "Your username is $GREEN "$user" $ENDCOLOR"
 read -p " Are you sure? " -n 1 -r 
 echo
+echo -e "For $GREEN Hyprland type y $ENDCOLOR $YELLOW Gnome type n $ENDCOLOR"
+read -p " (y)Hyprland (n)Gnome " -n 1 -r 
+echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-  echo -e  "            👋 $GREEN $user $ENDCOLOR          "
+  echo -e  "            👋 $GREEN $user on Hyprland $ENDCOLOR          "
 sleep 2
   sed -i "s/user =.*/user = \"${user}\";/" ./flake.nix
-  nixos-rebuild switch --flake .#${user}
+  nixos-rebuild switch --flake .#hyprland
+fi
+if [[ $REPLY =~ ^[Nn]$ ]]
+then
+  echo -e  "            👋 $GREEN $user on Gnome $ENDCOLOR          "
+sleep 2
+  sed -i "s/user =.*/user = \"${user}\";/" ./flake.nix
+  nixos-rebuild switch --flake .#gnome
 fi
 
 
