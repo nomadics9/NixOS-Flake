@@ -86,46 +86,35 @@ in
     # ];
     # };
     
-  #DIRS
-    # environment.etc."xdg/user-dirs.defaults".text= ''
-    # DESKTOP=$HOME/Desktop
-    # DOWNLOAD=$HOME/Downloads
-    # TEMPLATES=$HOME/Templates
-    # PUBLICSHARE=$HOME/Public
-    # DOCUMENTS=$HOME/Documents
-    # MUSIC=$HOME/Music
-    # PICTURES=$HOME/Photos
-    # VIDEOS=$HOME/Video 
-    # '';
 
   home.packages = with pkgs; [
      neovim
      firefox-wayland
-     swaylock-effects swayidle wlogout swaybg  #Login etc..  
-     waybar                                    #topbar 
-     hyprland-protocols
+     #swaylock-effects swayidle wlogout swaybg  #Login etc..  
+     #waybar                                    #topbar 
+     #hyprland-protocols
      libsForQt5.qt5.qtwayland
      #rofi-wayland rofi-emoji
-     dunst				       #notifications
+     #dunst				       #notifications
      jellyfin-ffmpeg                           #multimedia libs
      viewnior                                  #image viewr
      pavucontrol                               #Volume control
      #xfce.thunar                               #filemanager
      #xfce.xfconf
-     gnome-text-editor
-     gnome.file-roller
-     gnome.gnome-font-viewer
-     gnome.gnome-calculator
+     #gnome-text-editor
+     #gnome.file-roller
+     #gnome.gnome-font-viewer
+     #gnome.gnome-calculator
      vlc                                       #Video player
      amberol                                   #Music player
      cava                                      #Sound Visualized
-     wl-clipboard                              
-     wf-recorder                               #Video recorder
-     sway-contrib.grimshot                     #Screenshot
-     ffmpegthumbnailer                         #thumbnailer
-     playerctl                                 #play,pause..
-     pamixer                                   #mixer
-     brightnessctl                             #Brightness control
+     #wl-clipboard                              
+     #wf-recorder                               #Video recorder
+     #sway-contrib.grimshot                     #Screenshot
+     #ffmpegthumbnailer                         #thumbnailer
+     #playerctl                                 #play,pause..
+     #pamixer                                   #mixer
+     #brightnessctl                             #Brightness control
      ####GTK Customization####
      nordic
      papirus-icon-theme
@@ -136,8 +125,8 @@ in
      libcanberra-gtk3                          #notification sound
      #########System#########
      kitty
-     gnome.gnome-system-monitor
-     libnotify
+     #gnome.gnome-system-monitor
+     #libnotify
      poweralertd
      dbus
      #wrapGAppsHook
@@ -160,14 +149,14 @@ in
 	     #QT_QPA_PLATFORM = "wayland-egl";
 	     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
 	     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-	     WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+	     #WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
 	     #WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line  
-	     GBM_BACKEND = "nvidia-drm";
-	     CLUTTER_BACKEND = "wayland";
+	     #GBM_BACKEND = "nvidia-drm";
+	     #CLUTTER_BACKEND = "wayland";
 	     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
 	     LIBVA_DRIVER_NAME = "nvidia";
-	     WLR_RENDERER = "vulkan";
-	     __NV_PRIME_RENDER_OFFLOAD="1"; 
+	     #WLR_RENDERER = "vulkan";
+	     #__NV_PRIME_RENDER_OFFLOAD="1"; 
 	     XDG_CURRENT_DESKTOP = "gnome";
 	     XDG_SESSION_DESKTOP = "gnome";
 	     #XDG_SESSION_TYPE = "wayland";
