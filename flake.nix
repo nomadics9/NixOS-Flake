@@ -23,7 +23,7 @@
         hyprland = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {inherit user;};
-          modules = [ ./configuration.nix
+          modules = [ ./hosts/hyprland/configuration.nix
               
             hyprland.nixosModules.default
             {

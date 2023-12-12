@@ -58,16 +58,16 @@
   };
 
   #thunar
-   # programs.xfce.thunar = {
-   #   package = pkgs.xfce.thunar;
-   #   enable = true;
-   #   plugins = with pkgs.xfce; [
-   #   thunar-archive-plugin
-   #   thunar-volman
-   #   xfconf
-   # ];
-   # };
-
+    # programs.xfce.thunar = {
+    #   package = pkgs.xfce.thunar;
+    #   enable = true;
+    #   plugins = with pkgs.xfce; [
+    #   thunar-archive-plugin
+    #   thunar-volman
+    #   xfconf
+    # ];
+    # };
+    
   #DIRS
     # environment.etc."xdg/user-dirs.defaults".text= ''
     # DESKTOP=$HOME/Desktop
