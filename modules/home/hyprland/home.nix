@@ -4,6 +4,8 @@ let
 
 in
 {
+  imports = [./../pkgs/waybar.nix];
+
   programs.zsh = {
   enable = true;
   shellAliases = {
@@ -103,7 +105,7 @@ in
      neovim
      firefox-wayland
      swaylock-effects swayidle wlogout swaybg  #Login etc..  
-     waybar                                    #topbar 
+     #waybar                                    #topbar 
      hyprland-protocols
      libsForQt5.qt5.qtwayland
      #rofi-wayland rofi-emoji
