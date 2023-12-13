@@ -3,8 +3,7 @@ let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 in
 {
-
-  programs.bash = {
+  programs.zsh = {
   enable = true;
   shellAliases = {
     switchhypr = "sudo nixos-rebuild switch --flake .#hyprland";
@@ -15,9 +14,21 @@ in
     cleanold = "sudo nix-collect-garbage --delete-old";
     cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
     };
+    enableAutosuggestions = true;
+     zplug = {
+     enable = true;
+     plugins = [
+       { name = "zsh-users/zsh-autosuggestions"; }
+       ];
+    };
   };
+
   #starship
-    programs.starship.enable = true;
+    programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    };
+
 
   # Allow "unfree" licenced packages
   nixpkgs.config = { allowUnfree = true; };

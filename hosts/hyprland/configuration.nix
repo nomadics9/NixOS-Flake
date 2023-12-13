@@ -18,6 +18,11 @@
   #fix
     #boot.kernelParams = [ "intel_pstate=active" ];
 
+    programs.zsh = {
+    enable = true;
+    };
+    users.defaultUserShell = pkgs.zsh;
+
   
   #Nix
     nix.optimise.automatic = true;
@@ -28,6 +33,7 @@
         experimental-features = nix-command flakes
       '';
     };
+
  
 
   #ntfs support
