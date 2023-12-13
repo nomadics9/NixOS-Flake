@@ -13,18 +13,14 @@
                 ./../../modules/nixos/users.nix
                 ./../../modules/nixos/nvidia.nix
     ];
-  #TEMP
-    xdg.portal.config.common.default = "*";
-  #fix
-    #boot.kernelParams = [ "intel_pstate=active" ];
-
-    programs.zsh = {
-    enable = true;
-    };
-    users.defaultUserShell = pkgs.zsh;
-
   
-  #Nix
+  # TEMP
+    xdg.portal.config.common.default = "*";
+
+  # fix
+    #boot.kernelParams = [ "intel_pstate=active" ];
+  
+  # Nix
     nix.optimise.automatic = true;
     nixpkgs.config.allowUnfree = true;
     nix = {
@@ -36,7 +32,7 @@
 
  
 
-  #ntfs support
+  # ntfs support
     boot.supportedFilesystems = [ "ntfs" ];
 
   # Fonts
@@ -45,7 +41,7 @@
       noto-fonts-emoji
      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Iosevka"  ]; })
      ];
-  #emojis
+  # emojis
     services.gollum.emoji = true;
 
 

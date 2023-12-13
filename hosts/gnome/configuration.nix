@@ -8,19 +8,13 @@
                  ./../../modules/nixos/users.nix
                  ./../../modules/nixos/nvidia.nix
     ];
-  #TEMP
+
+  # TEMP
     xdg.portal.config.common.default = "*";
-  #fix
+  # fix
     #boot.kernelParams = [ "intel_pstate=active" ];
 
-     programs.zsh = {
-    enable = true;
-    };
-    users.defaultUserShell = pkgs.zsh;
-
-
-
-  #Nix
+  # Nix
     nix.optimise.automatic = true;
     nixpkgs.config.allowUnfree = true;
     nix = {
