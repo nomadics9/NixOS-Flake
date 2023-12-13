@@ -14,6 +14,7 @@ in
     cleanold = "sudo nix-collect-garbage --delete-old";
     cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
     };
+    initExtra = "unsetopt beep";
     enableAutosuggestions = true;
      zplug = {
      enable = true;

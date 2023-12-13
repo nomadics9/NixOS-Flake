@@ -61,6 +61,7 @@
   #nvidia.forceFullCompositionPipeline = true;
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   nvidia.modesetting.enable = true;
+  nvidia.nvidiaPersistenced = true;
 
   #nvidia.open = true;
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
