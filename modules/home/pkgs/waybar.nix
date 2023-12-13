@@ -70,7 +70,7 @@ programs.waybar = {
             format = "{icon}";
             tooltip = true;
             format-alt = "<small>{percent}%</small>";
-            format-icons = ["󱩎 " "󱩏 " "󱩐 " "󱩑 " "󱩒 " "󱩓 " "󱩔 " "󱩕 " "󱩖 " "󰛨 "];
+            format-icons = ["󱩎" "󱩏" "󱩐" "󱩑" "󱩒" "󱩓" "󱩔" "󱩕" "󱩖" "󰛨"];
             on-scroll-up = "brightnessctl set 1%+";
             on-scroll-down = "brightnessctl set 1%-";
             smooth-scrolling-threshold = "2400";
@@ -129,8 +129,8 @@ programs.waybar = {
             format-notcharging = "󰚥";
             format-full = "󰂄";
 
-            format-alt = "<small>{capacity}%</small>";
-            format-icons = ["󱊡 " "󱊢 " "󱊣 "];
+            format-alt = "<small>{capacity}%</small> ";
+            format-icons = ["󱊡" "󱊢" "󱊣"];
           };
 
           "custom/weather" = {
@@ -372,7 +372,8 @@ window#waybar.hidden {
 #battery {
   color: #8fbcbb;
   border-radius: 0px 8px 8px 0px;
-  padding-right: 2px;
+  padding-right: 14px;
+  padding-left: 14px;
   font-size: 22px;
 }
 

@@ -4,7 +4,10 @@ let
 
 in
 {
-  imports = [./../pkgs/waybar.nix];
+  imports = [
+	./../pkgs/waybar.nix
+	./../pkgs/hyprland.nix
+	];
 
   programs.zsh = {
   enable = true;
