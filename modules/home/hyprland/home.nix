@@ -150,6 +150,7 @@ in
      cudatoolkit
      ###apps###
      discord
+     docker
   ];
 
   #Session variables

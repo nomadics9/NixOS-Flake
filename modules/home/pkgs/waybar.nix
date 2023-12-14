@@ -389,8 +389,8 @@ programs.waybar = {
 
           #battery.charging { 
             font-size: 18px;
-            padding-right: 13px;
-            padding-left: 4px;
+            padding-right: 12px;
+            padding-left: 12px;
           }
 
           #battery.full,
