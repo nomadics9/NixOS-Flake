@@ -21,7 +21,8 @@ echo
 echo -e "Type your desired $GREEN username $ENDCOLOR" 
 read user
 echo
-cp /etc/nixos/hardware-configuration.nix .
+cp /etc/nixos/hardware-configuration.nix ./hosts/hyprland
+cp /etc/nixos/hardware-configuration.nix ./hosts/gnome
 echo
 echo -e "$GREEN Moments.... $ENDCOLOR"
 sleep 1

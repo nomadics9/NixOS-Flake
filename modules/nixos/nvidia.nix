@@ -8,31 +8,31 @@
 
   services.xserver = {
     videoDrivers = [ "nvidia" ];
-    config = ''
-      Section "Device"
-          Identifier  "Intel Graphics"
-          Driver      "intel"
-         #Option      "AccelMethod"  "sna" # default
-         #Option      "AccelMethod"  "uxa" # fallback
-          Option      "TearFree"        "true"
-          Option      "SwapbuffersWait" "true"
-          BusID       "PCI:0:2:0"
-         #Option      "DRI" "2"             # DRI3 is now default
-      EndSection
-
-      Section "Device"
-          Identifier "nvidia"
-          Driver "nvidia"
-          BusID "PCI:1:0:0"
-          Option "AllowEmptyInitialConfiguration"
-          Option         "TearFree" "true"
-      EndSection
-    '';
-   screenSection = ''
-     Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
-     Option         "AllowIndirectGLXProtocol" "off"
-     Option         "TripleBuffer" "on"
-     '';
+   #  config = ''
+   #    Section "Device"
+   #        Identifier  "Intel Graphics"
+   #        Driver      "intel"
+   #       #Option      "AccelMethod"  "sna" # default
+   #       #Option      "AccelMethod"  "uxa" # fallback
+   #        Option      "TearFree"        "true"
+   #        Option      "SwapbuffersWait" "true"
+   #        BusID       "PCI:0:2:0"
+   #       #Option      "DRI" "2"             # DRI3 is now default
+   #    EndSection
+   #
+   #    Section "Device"
+   #        Identifier "nvidia"
+   #        Driver "nvidia"
+   #        BusID "PCI:1:0:0"
+   #        Option "AllowEmptyInitialConfiguration"
+   #        Option         "TearFree" "true"
+   #    EndSection
+   #  '';
+   # screenSection = ''
+   #   Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+   #   Option         "AllowIndirectGLXProtocol" "off"
+   #   Option         "TripleBuffer" "on"
+   #   '';
    #  deviceSection = '' 
    #  Option "TearFree" "true"
    # '';
@@ -57,8 +57,8 @@
   nvidia.nvidiaSettings = true;
   nvidia.powerManagement.enable = true;
   nvidia.powerManagement.finegrained = true;
-
-  #nvidia.forceFullCompositionPipeline = true;
+  
+  nvidia.forceFullCompositionPipeline = true;
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   nvidia.modesetting.enable = true;
   nvidia.nvidiaPersistenced = true;
@@ -70,14 +70,14 @@
   #offload , Sync or reverseSync
     nvidia.prime = {
     #reSync Mode
-     #reverseSync.enable = true;
+    # reverseSync.enable = true;
     #Sync Mode
      #sync.enable = true;
     #Offload Mode
-     offload = {
-     enable = true;
-     enableOffloadCmd = true;
-    };
+      offload = {
+      enable = true;
+      enableOffloadCmd = true;
+     };
 
     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
     nvidiaBusId = "PCI:1:0:0";
@@ -104,8 +104,10 @@
   # Nvidia in Docker
    virtualisation.docker = {
     enable = true;
+    enableOnBoot= true;
     enableNvidia = true;
    }; 
+   systemd.enableUnifiedCgroupHierarchy = false;
 
 
 }

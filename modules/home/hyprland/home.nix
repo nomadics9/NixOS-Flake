@@ -147,10 +147,9 @@ in
      poweralertd
      dbus
      wrapGAppsHook
-     cudatoolkit
+     #cudatoolkit
      ###apps###
      discord
-     docker
   ];
 
   #Session variables

@@ -7,8 +7,11 @@
       isNormalUser = true;
       description = "${user}";
       extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" "docker" ];
-      packages = with pkgs; [xdg-utils
-      xwaylandvideobridge];
+      packages = with pkgs; [
+      xdg-utils
+      xwaylandvideobridge
+      ];
+      
     };
 
 

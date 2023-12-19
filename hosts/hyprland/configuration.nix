@@ -168,6 +168,7 @@
      neofetch
      git
      gh
+     cudatoolkit
     ];
 
   #Firewall
