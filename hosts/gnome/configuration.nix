@@ -160,7 +160,7 @@
         ]);
 
     #services.xserver.displayManager.gdm.settings = {};
-   
+   services.gnome.gnome-browser-connector.enable = true; 
   #xdg  
     # xdg.portal = {
     #   enable = true;
@@ -195,7 +195,7 @@
     #For Chromecast from chrome
     #networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
   # Or disable the firewall altogether.
-   #networking.firewall.enable = false;
+   networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

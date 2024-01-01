@@ -27,6 +27,8 @@ exec-once = syncthing
 exec-once = sleep 4; qsyncthingtray
 # Wallpaper
 exec-once= bash ~/.config/waybar/scripts/changewallpaper.sh
+# Cursor
+exec-once= hyprctl setcursor Bibata-Modern-Classic 24
 # Bluetooth
 exec-once=blueman-applet # Make sure you have installed blueman + blueman-utils
 

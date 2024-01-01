@@ -13,6 +13,7 @@ in
     clean = "sudo nix-collect-garbage -d";
     cleanold = "sudo nix-collect-garbage --delete-old";
     cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
+    nvim="kitty @ set-spacing padding=0 && /etc/profiles/per-user/nomad/bin/nvim";
     };
     initExtra = "unsetopt beep";
     enableAutosuggestions = true;
@@ -20,6 +21,7 @@ in
      enable = true;
      plugins = [
        { name = "zsh-users/zsh-autosuggestions"; }
+       { name = "zsh-users/zsh-syntax-highlighting"; }	
        ];
     };
   };
@@ -29,7 +31,6 @@ in
     enable = true;
     enableZshIntegration = true;
     };
-
 
   # Allow "unfree" licenced packages
   nixpkgs.config = { allowUnfree = true; };
@@ -44,48 +45,59 @@ in
     gtk = {
       enable = true;
       font.name = "TeX Gyre Adventor 10";
-      theme = {
-        name = "Juno";
-        package = pkgs.juno-theme;
-      };
+       # theme = {
+       #   name = "Juno";
+       #   package = pkgs.juno-theme;
+       # };
       iconTheme = {
         name = "Papirus-Dark";
         package = pkgs.papirus-icon-theme;
       };
+      cursorTheme = {
+          name = "Bibata-Modern-Classic";
+          package = pkgs.bibata-cursors;
+        };
 
-      #gtk3.extraConfig = { 
-      #Settings = ''
-      #  gtk-application-prefer-dark-theme=1
-      #'';
-      #};
+      gtk3.extraConfig = { 
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-name=Bibata-Modern-Classic
+      '';
+      };
     
 
-      #gtk4.extraConfig = {
-      #Settings = ''
-      #  gtk-application-prefer-dark-theme=1
-      #'';
-    #};
+      gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-name=Bibata-Modern-Classic
+      '';
+      };
     
-  };
+    };
   #gnome outside gnome
   dconf = {
     enable = true;
     settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
-	theme = "Juno";
+	      theme = "Juno";
+      };
+      "org/gnome/desktop/wm/keybindings" = {
+        close = ["<Super>q"];
+        maximize = "<Super>f";
+        minimize = ["<Super>comma"];
       };
     };
   };
 
   #rofi
-  programs.rofi = {
-    package = pkgs.rofi-wayland;
-    enable = true;
-    plugins = [pkgs.rofi-emoji];
-    configPath = ".config/rofi/config.rasi";
-    theme = "nord-oneline.rasi"; 
-  };
+  # programs.rofi = {
+  #   package = pkgs.rofi-wayland;
+  #   enable = true;
+  #   plugins = [pkgs.rofi-emoji];
+  #   configPath = ".config/rofi/config.rasi";
+  #   theme = "nord-oneline.rasi"; 
+  # };
 
   #thunar
     # programs.thunar = {
@@ -109,8 +121,8 @@ in
      #rofi-wayland rofi-emoji
      #dunst				       #notifications
      jellyfin-ffmpeg                           #multimedia libs
-     viewnior                                  #image viewr
-     pavucontrol                               #Volume control
+     #viewnior                                  #image viewr
+     #pavucontrol                               #Volume control
      #xfce.thunar                               #filemanager
      #xfce.xfconf
      #gnome-text-editor
@@ -130,21 +142,23 @@ in
      ####GTK Customization####
      nordic
      papirus-icon-theme
-     gtk3
-     glib
-     xcur2png
-     rubyPackages.glib2
-     libcanberra-gtk3                          #notification sound
+     #gtk3
+     #glib
+     #xcur2png
+     #rubyPackages.glib2
+     #libcanberra-gtk3                          #notification sound
      #########System#########
      kitty
-     #gnome.gnome-system-monitor
-     #libnotify
      poweralertd
      dbus
-     #wrapGAppsHook
+     gnome-browser-connector
      cudatoolkit
+     gnomeExtensions.gsconnect
+     gnomeExtensions.legacy-gtk3-theme-scheme-auto-switcher
+     gnome-network-displays
      ###apps###
      discord
+     thunderbird
   ];
 
   #Session variables
@@ -165,19 +179,19 @@ in
 	     #WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line  
 	     #GBM_BACKEND = "nvidia-drm";
 	     #CLUTTER_BACKEND = "wayland";
-	     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-	     LIBVA_DRIVER_NAME = "nvidia";
+	     # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+	     # LIBVA_DRIVER_NAME = "nvidia";
 	     #WLR_RENDERER = "vulkan";
 	     #__NV_PRIME_RENDER_OFFLOAD="1"; 
-	     XDG_CURRENT_DESKTOP = "gnome";
-	     XDG_SESSION_DESKTOP = "gnome";
+	     #XDG_CURRENT_DESKTOP = "gnome";
+	     #XDG_SESSION_DESKTOP = "gnome";
 	     #XDG_SESSION_TYPE = "wayland";
 	     #GTK_USE_PORTAL = "1";
 	     #NIXOS_XDG_OPEN_USE_PORTAL = "1";
-	     XDG_CACHE_HOME = "\${HOME}/.cache";
-	     XDG_CONFIG_HOME = "\${HOME}/.config";
+	     #XDG_CACHE_HOME = "\${HOME}/.cache";
+	     #XDG_CONFIG_HOME = "\${HOME}/.config";
 	     #XDG_BIN_HOME = "\${HOME}/.local/bin";
-	     XDG_DATA_HOME = "\${HOME}/.local/share";
+	     #XDG_DATA_HOME = "\${HOME}/.local/share";
 
     };
   # This value determines the Home Manager release that your

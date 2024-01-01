@@ -19,6 +19,7 @@ in
     clean = "sudo nix-collect-garbage -d";
     cleanold = "sudo nix-collect-garbage --delete-old";
     cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
+    nvim="kitty @ set-spacing padding=0 && /etc/profiles/per-user/nomad/bin/nvim";
     };
     initExtra = "unsetopt beep";
     enableAutosuggestions = true;
@@ -58,21 +59,26 @@ in
         name = "Papirus-Dark";
         package = pkgs.papirus-icon-theme;
       };
+      cursorTheme = {
+          name = "Bibata-Modern-Classic";
+          package = pkgs.bibata-cursors;
+        };
 
-      #gtk3.extraConfig = { 
-      #Settings = ''
-      #  gtk-application-prefer-dark-theme=1
-      #'';
-      #};
-    
+      gtk3.extraConfig = { 
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-name=Bibata-Modern-Classic
+      '';
+      };
 
-      #gtk4.extraConfig = {
-      #Settings = ''
-      #  gtk-application-prefer-dark-theme=1
-      #'';
-    #};
-    
-  };
+      gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-name=Bibata-Modern-Classic
+      '';
+      };
+
+   };
   #gnome outside gnome
   dconf = {
     enable = true;
@@ -147,9 +153,9 @@ in
      poweralertd
      dbus
      wrapGAppsHook
-     #cudatoolkit
      ###apps###
      discord
+     ollama
   ];
 
   #Session variables
