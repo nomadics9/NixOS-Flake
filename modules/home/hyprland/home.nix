@@ -118,16 +118,15 @@ in
      hyprland-protocols
      libsForQt5.qt5.qtwayland
      #rofi-wayland rofi-emoji
-     dunst				       #notifications
+     dunst				                             #notifications
      jellyfin-ffmpeg                           #multimedia libs
      viewnior                                  #image viewr
      pavucontrol                               #Volume control
-     #xfce.thunar                               #filemanager
-     #xfce.xfconf
      gnome-text-editor
      gnome.file-roller
      gnome.gnome-font-viewer
      gnome.gnome-calculator
+     gnome.nautilus                            #gnome file manager
      vlc                                       #Video player
      amberol                                   #Music player
      cava                                      #Sound Visualized
@@ -163,7 +162,7 @@ in
 	     BROWSER = "firefox";
 	     EDITOR = "nvim";
 	     TERMINAL = "kitty";
-	     NIXOS_OZONE_WL = "1";
+	     #NIXOS_OZONE_WL = "1";
 	     QT_QPA_PLATFORMTHEME = "gtk3";
 	     QT_SCALE_FACTOR = "1";
 	     MOZ_ENABLE_WAYLAND = "1";
@@ -177,7 +176,7 @@ in
 	     GBM_BACKEND = "nvidia-drm";
 	     CLUTTER_BACKEND = "wayland";
 	     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-	     LIBVA_DRIVER_NAME = "nvidia";
+	     LIBVA_DRIVER_NAME = "iHD";
 	     WLR_RENDERER = "vulkan";
 	     #__NV_PRIME_RENDER_OFFLOAD="1"; 
 	     XDG_CURRENT_DESKTOP = "Hyprland";

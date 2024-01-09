@@ -213,7 +213,7 @@ bind= SUPER,RETURN, exec, kitty --title kitty_term
 
 bind = SUPER, C, killactive,
 bind = SUPERSHIFT, Q, exit,
-bind = SUPER, E, exec, thunar
+bind = SUPER, E, exec, nautilus
 bind = SUPER, R, exec, rofi -show drun -show-icons
 bind = SUPER, P, pseudo,
 bind = SUPER, ESCAPE, exec, wlogout
