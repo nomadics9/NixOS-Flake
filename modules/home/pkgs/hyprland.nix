@@ -14,9 +14,13 @@ wayland.windowManager.hyprland.extraConfig =
 
 #########################################################################################
 
+debug {
+    suppress_errors = true
+}
+
 # You have to change this based on your monitor
-monitor=eDP-1,2560x1600@120,0x0,1.25
-#monitor=HDMI-A-1,1920x1080@60.0,auto,1,mirror,eDP-1
+monitor=eDP-1,2560x1600@119.93,0x0,1.25
+monitor=DP-1,4096x2160@60.0,0x0,1,mirror,eDP-1
 #monitor=eDP-1,auto,1
 # Status bar :) 
 exec-once=waybar
@@ -100,7 +104,7 @@ animations {
     animation=fadeIn,1,10,default
     animation=workspaces,1,8.8,overshot,slide
     animation=border,1,14,default
-    #animation=windows,1,8,default,popin 80%
+    animation=windows,1,8,default,popin 80%
 }
 
 dwindle {

@@ -12,6 +12,7 @@
                # ./../../modules/nixos/shell.nix
                 ./../../modules/nixos/users.nix
                 ./../../modules/nixos/nvidia.nix
+                ./../../modules/vfio/myVFIO.nix
     ];
   
   # TEMP
@@ -100,9 +101,9 @@
  
     services.xserver = {
         exportConfiguration = true; # link /usr/share/X11/ properly
-        layout = "us,ara";
-        xkbOptions = "grp:alt_shift_toggle";
-        xkbVariant = "qwerty_digits";
+        xkb.layout = "us,ara";
+        xkb.options = "grp:alt_shift_toggle";
+        xkb.variant = "qwerty_digits";
     };
 
   ###Services###
@@ -115,8 +116,8 @@
   # Enable CUPS to print documents.
     services.printing.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
-    services.xserver.libinput.enable = true;
-    services.xserver.libinput.touchpad.tapping = true; #tap
+    services.libinput.enable = true;
+    services.libinput.touchpad.tapping = true; #tap
 
   #polkit Auth Agent
     systemd = {
@@ -168,7 +169,6 @@
      neofetch
      git
      gh
-     cudatoolkit
     ];
 
   #Firewall
@@ -177,7 +177,7 @@
     #For Chromecast from chrome
     #networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
   # Or disable the firewall altogether.
-   #networking.firewall.enable = false;
+   networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

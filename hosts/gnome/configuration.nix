@@ -93,9 +93,9 @@
  
     services.xserver = {
         exportConfiguration = true; # link /usr/share/X11/ properly
-        layout = "us,ara";
-        xkbOptions = "grp:alt_shift_toggle";
-        xkbVariant = "qwerty_digits";
+        xkb.layout = "us,ara";
+        xkb.options = "grp:alt_shift_toggle";
+        xkb.variant = "qwerty_digits";
     };
 
   ###Services###
@@ -108,8 +108,8 @@
   # Enable CUPS to print documents.
     services.printing.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
-    services.xserver.libinput.enable = true;
-    services.xserver.libinput.touchpad.tapping = true; #tap
+    services.libinput.enable = true;
+    services.libinput.touchpad.tapping = true; #tap
 
   #polkit Auth Agent
     systemd = {
@@ -142,7 +142,7 @@
           cheese # webcam tool
           gnome-music
           gnome-terminal
-          gedit # text editor
+          #gedit # text editor
           epiphany # web browser
           geary # email reader
           evince # document viewer

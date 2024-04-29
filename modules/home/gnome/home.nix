@@ -154,11 +154,11 @@ in
      gnome-browser-connector
      cudatoolkit
      gnomeExtensions.gsconnect
-     gnomeExtensions.legacy-gtk3-theme-scheme-auto-switcher
-     gnome-network-displays
+     #gnomeExtensions.legacy-gtk3-theme-scheme-auto-switcher
+     #gnome-network-displays
      ###apps###
      discord
-     thunderbird
+     #thunderbird
   ];
 
   #Session variables

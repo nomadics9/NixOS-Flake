@@ -22,7 +22,7 @@ in
     nvim="kitty @ set-spacing padding=0 && /etc/profiles/per-user/nomad/bin/nvim";
     };
     initExtra = "unsetopt beep";
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
      zplug = {
      enable = true;
      plugins = [
@@ -151,10 +151,11 @@ in
      libnotify
      poweralertd
      dbus
-     wrapGAppsHook
+     cudatoolkit
      ###apps###
      discord
-     ollama
+     android-studio
+     (ollama.override { acceleration = "cuda"; })
   ];
 
   #Session variables
@@ -171,14 +172,14 @@ in
 	     QT_QPA_PLATFORM = "wayland-egl";
 	     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
 	     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-	     WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+	     WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";
 	     #WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line  
 	     GBM_BACKEND = "nvidia-drm";
 	     CLUTTER_BACKEND = "wayland";
 	     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
 	     LIBVA_DRIVER_NAME = "iHD";
 	     WLR_RENDERER = "vulkan";
-	     #__NV_PRIME_RENDER_OFFLOAD="1"; 
+	     __NV_PRIME_RENDER_OFFLOAD="1";
 	     XDG_CURRENT_DESKTOP = "Hyprland";
 	     XDG_SESSION_DESKTOP = "Hyprland";
 	     XDG_SESSION_TYPE = "wayland";

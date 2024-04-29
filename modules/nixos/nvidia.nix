@@ -38,6 +38,7 @@
    # '';
   };
 
+#boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
 
   hardware = {
@@ -72,7 +73,7 @@
     #reSync Mode
     # reverseSync.enable = true;
     #Sync Mode
-     #sync.enable = true;
+    # sync.enable = true;
     #Offload Mode
       offload = {
       enable = true;
