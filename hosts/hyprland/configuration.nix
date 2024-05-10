@@ -12,7 +12,7 @@
                # ./../../modules/nixos/shell.nix
                 ./../../modules/nixos/users.nix
                 ./../../modules/nixos/nvidia.nix
-                ./../../modules/vfio/myVFIO.nix
+                #./../../modules/vfio/myVFIO.nix
     ];
   
   # TEMP

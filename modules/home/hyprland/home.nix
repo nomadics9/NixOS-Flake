@@ -155,6 +155,7 @@ in
      ###apps###
      discord
      android-studio
+     
      (ollama.override { acceleration = "cuda"; })
   ];
 

@@ -104,7 +104,7 @@ animations {
     animation=fadeIn,1,10,default
     animation=workspaces,1,8.8,overshot,slide
     animation=border,1,14,default
-    animation=windows,1,8,default,popin 80%
+    #animation=windows,1,8,default,popin 80%
 }
 
 dwindle {
