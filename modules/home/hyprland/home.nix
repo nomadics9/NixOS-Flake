@@ -9,6 +9,17 @@ in
 	./../pkgs/hyprland.nix
 	];
 
+   programs.vscode = {
+
+enable = true;
+
+# userSettings = { 
+#   "window.titleBarStyle" = "custom";
+#   "editor.fontSize" = 21;
+#   };
+
+};
+
   programs.zsh = {
   enable = true;
   shellAliases = {
@@ -20,6 +31,7 @@ in
     cleanold = "sudo nix-collect-garbage --delete-old";
     cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
     nvim="kitty @ set-spacing padding=0 && /etc/profiles/per-user/nomad/bin/nvim";
+    zed="steam-run zed";
     };
     initExtra = "unsetopt beep";
     autosuggestion.enable = true;
@@ -27,7 +39,7 @@ in
      enable = true;
      plugins = [
        { name = "zsh-users/zsh-autosuggestions"; }
-       { name = "zsh-users/zsh-syntax-highlighting"; }	
+       { name = "zsh-users/zsh-syntax-highlighting"; }
        ];
     };
   };
@@ -47,7 +59,7 @@ in
   home.username = "${user}";
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "23.05";
-  #Gtk 
+  #Gtk
     gtk = {
       enable = true;
       font.name = "TeX Gyre Adventor 10";
@@ -64,7 +76,7 @@ in
           package = pkgs.bibata-cursors;
         };
 
-      gtk3.extraConfig = { 
+      gtk3.extraConfig = {
       Settings = ''
         gtk-application-prefer-dark-theme=1
         gtk-cursor-theme-name=Bibata-Modern-Classic
@@ -96,7 +108,7 @@ in
     enable = true;
     plugins = [pkgs.rofi-emoji];
     configPath = ".config/rofi/config.rasi";
-    theme = "nord-oneline.rasi"; 
+    theme = "nord-oneline.rasi";
   };
 
   #thunar
@@ -109,12 +121,12 @@ in
     #   xfconf
     # ];
     # };
-    
+
   home.packages = with pkgs; [
      neovim
      firefox-wayland
-     swaylock-effects swayidle wlogout swaybg  #Login etc..  
-     #waybar                                    #topbar 
+     swaylock-effects swayidle wlogout swaybg  #Login etc..
+     #waybar                                    #topbar
      hyprland-protocols
      libsForQt5.qt5.qtwayland
      #rofi-wayland rofi-emoji
@@ -130,7 +142,7 @@ in
      vlc                                       #Video player
      amberol                                   #Music player
      cava                                      #Sound Visualized
-     wl-clipboard                              
+     wl-clipboard
      wf-recorder                               #Video recorder
      sway-contrib.grimshot                     #Screenshot
      ffmpegthumbnailer                         #thumbnailer
@@ -154,9 +166,9 @@ in
      cudatoolkit
      ###apps###
      discord
+     zed-editor
      android-studio
-     
-     (ollama.override { acceleration = "cuda"; })
+     ollama
   ];
 
   #Session variables
@@ -164,7 +176,7 @@ in
 	     BROWSER = "firefox";
 	     EDITOR = "nvim";
 	     TERMINAL = "kitty";
-	     #NIXOS_OZONE_WL = "1";
+	     NIXOS_OZONE_WL = "1";
 	     QT_QPA_PLATFORMTHEME = "gtk3";
 	     QT_SCALE_FACTOR = "1";
 	     MOZ_ENABLE_WAYLAND = "1";
@@ -174,7 +186,7 @@ in
 	     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
 	     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
 	     WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";
-	     #WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line  
+	     #WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line
 	     GBM_BACKEND = "nvidia-drm";
 	     CLUTTER_BACKEND = "wayland";
 	     __GLX_VENDOR_LIBRARY_NAME = "nvidia";

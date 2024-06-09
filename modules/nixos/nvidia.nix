@@ -59,10 +59,10 @@
   nvidia.powerManagement.enable = true;
   nvidia.powerManagement.finegrained = true;
   
-  nvidia.forceFullCompositionPipeline = true;
+  #nvidia.forceFullCompositionPipeline = true;
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   nvidia.modesetting.enable = true;
-  nvidia.nvidiaPersistenced = true;
+  #nvidia.nvidiaPersistenced = true;
 
   #nvidia.open = true;
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
@@ -103,12 +103,16 @@
   #services.switcherooControl.enable = true;
 
   # Nvidia in Docker
-   virtualisation.docker = {
-    enable = true;
-    enableOnBoot= true;
-    enableNvidia = true;
-   }; 
-   systemd.enableUnifiedCgroupHierarchy = false;
+    virtualisation.docker = {
+     enable = true;
+     enableOnBoot= true;
+     enableNvidia = true;
+    }; 
 
 
+   #virtualisation.containers.cdi.dynamic.nvidia.enable = true;
+   hardware.nvidia-container-toolkit.enable = true;
+   #systemd.enableUnifiedCgroupHierarchy = false;
+
+   services.ollama.acceleration = "cuda";
 }

@@ -153,7 +153,7 @@
         #xdg-desktop-portal-hyprland
         #xdg-desktop-portal-wlr
       ];
-      wlr.enable = true;
+      #wlr.enable = true;
     };
 
 

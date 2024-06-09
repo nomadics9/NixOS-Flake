@@ -272,6 +272,8 @@ bind=SUPERSHIFT,8,movetoworkspacesilent,8
 bind=SUPERSHIFT,9,movetoworkspacesilent,9
 bind=SUPERSHIFT,0,movetoworkspacesilent,10
 
+bind = ALT, Tab, cyclenext
+
 xwayland {
   force_zero_scaling = true
 }
