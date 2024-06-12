@@ -237,13 +237,13 @@ bind = SUPER, T, togglefloating,
 # Screen shot
 $screenshotarea = hyprctl keyword animation "fadeOut,0,0,default"; grimshot --notify copy active; hyprctl keyword animation "fadeOut,1,4,default"
 bind = SUPER, S, exec, $screenshotarea
-bind = SUPERSHIFT, S ,exec, grimshot --notify copy area
-#bind=SUPERSHIFT,S,exec,grim -g "$(slurp)" - | swappy -f -
+#bind = SUPERSHIFT, S ,exec, grimshot --notify copy area
+bind=SUPERSHIFT,S,exec, grimshot savecopy area - | swappy -f -
 # Screen recorder
 bind = SUPERSHIFT, R, exec,wf-recorder & dunstify -a Recordering Started -i -u -A "^C ,stop" -t 0 -i ~/icons/rec-button.png 
 # Emoji selector 
-#bind = SHIFTSUPER, E, exec, rofi -modi "emoji:rofimoji --keybinding-copy ctrl+c" -show emoji
-bind = SHIFTSUPER, E, exec, rofi -modi emoji -show emoji --keybinding-copy ctrl+c
+bind = SHIFTSUPER, E, exec, rofimoji
+#bind = SHIFTSUPER, E, exec, rofi -modi emoji -show emoji --keybinding-copy ctrl+c
 # change HZ
 bind = SUPER, A, exec, ~/.config/hypr/scripts/screenHz.sh 
 

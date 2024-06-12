@@ -106,21 +106,11 @@ enable = true;
   programs.rofi = {
     package = pkgs.rofi-wayland;
     enable = true;
-    plugins = [pkgs.rofi-emoji];
+    #plugins = [pkgs.rofimoji];
     configPath = ".config/rofi/config.rasi";
-    theme = "nord-oneline.rasi";
+    theme = "simple-tokyonight.rasi";
   };
 
-  #thunar
-    # programs.thunar = {
-    #   package = pkgs.xfce.thunar;
-    #   enable = true;
-    #   plugins = with pkgs.xfce; [
-    #   thunar-archive-plugin
-    #   thunar-volman
-    #   xfconf
-    # ];
-    # };
 
   home.packages = with pkgs; [
      neovim
@@ -129,7 +119,8 @@ enable = true;
      #waybar                                    #topbar
      hyprland-protocols
      libsForQt5.qt5.qtwayland
-     #rofi-wayland rofi-emoji
+     rofimoji
+     #rofi-emoji
      dunst				                             #notifications
      jellyfin-ffmpeg                           #multimedia libs
      viewnior                                  #image viewr
@@ -145,6 +136,7 @@ enable = true;
      wl-clipboard
      wf-recorder                               #Video recorder
      sway-contrib.grimshot                     #Screenshot
+     swappy
      ffmpegthumbnailer                         #thumbnailer
      playerctl                                 #play,pause..
      pamixer                                   #mixer
