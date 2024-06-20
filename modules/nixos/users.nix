@@ -23,14 +23,21 @@
     };
   
   # thunar
-    programs.thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-        xfconf
-      ];
-    };
+    # programs.thunar = {
+    #   enable = true;
+    #   plugins = with pkgs.xfce; [
+    #     thunar-archive-plugin
+    #     thunar-volman
+    #     xfconf
+    #   ];
+    # };
+
+
+    services.gnome.gnome-keyring.enable = true;
+    programs.nautilus-open-any-terminal = {
+        enable = true;
+        terminal = "kitty";
+      };
     services.gvfs.enable = true; 
     services.tumbler.enable = true;
 
@@ -59,7 +66,6 @@
     programs.zsh = {
     enable = true;
     };
-    users.defaultUserShell = pkgs.zsh;
-
+    users.defaultUserShell = pkgs.zsh;   
 }
 

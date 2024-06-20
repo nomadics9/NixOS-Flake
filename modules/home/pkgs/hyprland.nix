@@ -20,7 +20,7 @@ debug {
 
 # You have to change this based on your monitor
 monitor=eDP-1,2560x1600@119.93,0x0,1.25
-monitor=DP-1,4096x2160@60.0,0x0,1,mirror,eDP-1
+#monitor=DP-1,4096x2160@60.0,0x0,1,mirror,eDP-1
 #monitor=eDP-1,auto,1
 # Status bar :) 
 exec-once=waybar
@@ -36,7 +36,7 @@ exec-once= hyprctl setcursor Bibata-Modern-Classic 24
 # Bluetooth
 exec-once=blueman-applet # Make sure you have installed blueman + blueman-utils
 
-exec-once = dbus-update-actvation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
+exec-once = dbus-update-actvation-environment --systemd --all WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
 exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DBUS_SESSION_BUS_ADDRESS
 
 # Screen Sharing
@@ -48,6 +48,10 @@ input {
   #kb_options=caps:escape
   #repeat_rate=50
   #repeat_delay=240
+  
+  kb_layout=us,ara
+  kb_options=grp:alt_shift_toggle
+
 
   touchpad {
     disable_while_typing=1
@@ -55,6 +59,7 @@ input {
     clickfinger_behavior=1
     middle_button_emulation=0
     tap-to-click=1
+    sensitivity=1
   }
 }
 
@@ -162,7 +167,7 @@ windowrulev2 = tile,class:^(neovide)$
 # Increase the opacity 
 windowrule=opacity 0.96,thunar
 windowrule=opacity 0.96,discord
-windowrule=opacity 0.9,VSCodium
+windowrule=opacity 0.9,VSCode
 windowrule=opacity 0.96,obsidian
 windowrule=opacity 0.7,neovide
 
@@ -172,10 +177,10 @@ bindm=SUPER,mouse:272,movewindow
 bindm=SUPER,mouse:273,resizewindow
 
 #xwayland bridge
-#windowrulev2 = opacity 0.0 override 0.0 override,class:^(org.kde.xwaylandvideobridge)$
-#windowrulev2 = noanim,class:^(xwaylandvideobridge)$
-#windowrulev2 = nofocus,class:^(xwaylandvideobridge)$
-#windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
+windowrulev2 = opacity 0.0 override 0.0 override,class:^(org.kde.xwaylandvideobridge)$
+windowrulev2 = noanim,class:^(xwaylandvideobridge)$
+windowrulev2 = nofocus,class:^(xwaylandvideobridge)$
+windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
 
 ###########################################
 
@@ -274,13 +279,13 @@ bind=SUPERSHIFT,0,movetoworkspacesilent,10
 
 bind = ALT, Tab, cyclenext
 
+# unscale XWayland
 xwayland {
   force_zero_scaling = true
 }
 
-input {
-kb_layout=us,ara
-kb_options=grp:alt_shift_toggle
-}
+# toolkit-specific scale
+env = GDK_SCALE,1.25
+env = XCURSOR_SIZE,25
 '';
 }

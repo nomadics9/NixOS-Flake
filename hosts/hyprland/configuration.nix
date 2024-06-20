@@ -16,7 +16,7 @@
     ];
   
   # TEMP
-    xdg.portal.config.common.default = "*";
+    #xdg.portal.config.common.default = "*";
 
   # fix
     #boot.kernelParams = [ "intel_pstate=active" ];

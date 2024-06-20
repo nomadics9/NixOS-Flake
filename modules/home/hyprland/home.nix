@@ -9,15 +9,9 @@ in
 	./../pkgs/hyprland.nix
 	];
 
-   programs.vscode = {
-
-enable = true;
-
-# userSettings = { 
-#   "window.titleBarStyle" = "custom";
-#   "editor.fontSize" = 21;
-#   };
-
+  programs.vscode = {
+  enable = true;
+  package = pkgs.vscode.fhs;
 };
 
   programs.zsh = {
@@ -59,18 +53,31 @@ enable = true;
   home.username = "${user}";
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "23.05";
+
+home.pointerCursor = {
+  gtk.enable = true;
+  x11.enable = true;
+  package = pkgs.bibata-cursors;
+  name = "Bibata-Modern-Classic";
+  size = 25;
+};
+
+
   #Gtk
     gtk = {
       enable = true;
-      font.name = "TeX Gyre Adventor 10";
+      font.name = "TeX Gyre Adventor";
+      font.size = 10;
       theme = {
         name = "Juno";
         package = pkgs.juno-theme;
       };
+
       iconTheme = {
         name = "Papirus-Dark";
         package = pkgs.papirus-icon-theme;
       };
+
       cursorTheme = {
           name = "Bibata-Modern-Classic";
           package = pkgs.bibata-cursors;
@@ -97,7 +104,7 @@ enable = true;
     settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
-	theme = "Juno";
+	      theme = "Juno";
       };
     };
   };
@@ -106,7 +113,7 @@ enable = true;
   programs.rofi = {
     package = pkgs.rofi-wayland;
     enable = true;
-    #plugins = [pkgs.rofimoji];
+    plugins = [pkgs.rofimoji];
     configPath = ".config/rofi/config.rasi";
     theme = "simple-tokyonight.rasi";
   };
@@ -160,7 +167,6 @@ enable = true;
      discord
      zed-editor
      android-studio
-     ollama
   ];
 
   #Session variables
@@ -168,9 +174,9 @@ enable = true;
 	     BROWSER = "firefox";
 	     EDITOR = "nvim";
 	     TERMINAL = "kitty";
-	     NIXOS_OZONE_WL = "1";
+	     #NIXOS_OZONE_WL = "1";
 	     QT_QPA_PLATFORMTHEME = "gtk3";
-	     QT_SCALE_FACTOR = "1";
+	     QT_SCALE_FACTOR = "1.25";
 	     MOZ_ENABLE_WAYLAND = "1";
 	     SDL_VIDEODRIVER = "wayland";
 	     _JAVA_AWT_WM_NONREPARENTING = "1";
@@ -192,7 +198,7 @@ enable = true;
 	     #NIXOS_XDG_OPEN_USE_PORTAL = "1";
 	     XDG_CACHE_HOME = "\${HOME}/.cache";
 	     XDG_CONFIG_HOME = "\${HOME}/.config";
-	     #XDG_BIN_HOME = "\${HOME}/.local/bin";
+	     XDG_BIN_HOME = "/etc/profiles/per-user/${user}/bin";
 	     XDG_DATA_HOME = "\${HOME}/.local/share";
 
     };
