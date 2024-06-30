@@ -14,12 +14,13 @@
                 ./../../modules/nixos/nvidia.nix
                 #./../../modules/vfio/myVFIO.nix
     ];
-  
-  # TEMP
-    #xdg.portal.config.common.default = "*";
 
-  # fix
-    #boot.kernelParams = [ "intel_pstate=active" ];
+    
+  #App Image
+  programs.appimage = {
+      enable = true;
+      binfmt = true;
+    };
   
   # Nix
     nix.optimise.automatic = true;
@@ -169,7 +170,10 @@
      neofetch
      git
      gh
+     libappimage
     ];
+
+
 
   #Firewall
   # Open ports in the firewall.

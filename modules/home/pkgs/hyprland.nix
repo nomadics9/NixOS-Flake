@@ -27,7 +27,7 @@ exec-once=waybar
 exec-once = wl-clipboard-history -t
 # Notification 
 exec-once = poweralertd
-exec-once = syncthing
+#exec-once = syncthing
 exec-once = sleep 4; qsyncthingtray
 # Wallpaper
 exec-once= bash ~/.config/waybar/scripts/changewallpaper.sh
@@ -154,9 +154,9 @@ windowrule=float,title:^(fly_is_kitty)$
 
 
 
-windowrulev2 = float,class:^(google-chrome-beta)$,title:^(Save File)$
-windowrulev2 = float,class:^(google-chrome-beta)$,title:^(Open File)$
-windowrulev2 = float,class:^(google-chrome-beta)$,title:^(Picture-in-Picture)$
+windowrulev2 = float,class:^(firefox)$,title:^(Save File)$
+windowrulev2 = float,class:^(firefox)$,title:^(Open File)$
+windowrulev2 = float,class:^(firefox)$,title:^(Picture-in-Picture)$
 windowrulev2 = float,class:^(blueman-manager)$
 windowrulev2 = float,class:^(org.twosheds.iwgtk)$
 windowrulev2 = float,class:^(blueberry.py)$

@@ -14,6 +14,13 @@ in
   package = pkgs.vscode.fhs;
 };
 
+# programs.chromium.commandLineArgs = [
+#         "--enable-features=VaapiVideoDecodeLinuxGL"
+#         "--use-gl=angle"
+#         "--use-angle=gl"
+#         "--ozone-platform=wayland"
+#   ];
+
   programs.zsh = {
   enable = true;
   shellAliases = {
@@ -27,15 +34,19 @@ in
     nvim="kitty @ set-spacing padding=0 && /etc/profiles/per-user/nomad/bin/nvim";
     zed="steam-run zed";
     };
-    initExtra = "unsetopt beep";
+    initExtraFirst = "
+    unsetopt beep
+    ";
     autosuggestion.enable = true;
-     zplug = {
-     enable = true;
-     plugins = [
-       { name = "zsh-users/zsh-autosuggestions"; }
-       { name = "zsh-users/zsh-syntax-highlighting"; }
-       ];
-    };
+    syntaxHighlighting.enable = true;
+    #  zplug = {
+    #  enable = true;
+    #  plugins = [
+    #    { name = "zsh-users/zsh-autosuggestions"; }
+    #    { name = "zsh-users/zsh-syntax-highlighting"; }
+    #    { name = "romkatv/zsh-defer"; }
+    #    ];
+    # };
   };
 
   #starship
@@ -121,14 +132,14 @@ home.pointerCursor = {
 
   home.packages = with pkgs; [
      neovim
-     firefox-wayland
+     firefox
+     google-chrome
+     vivaldi
      swaylock-effects swayidle wlogout swaybg  #Login etc..
-     #waybar                                    #topbar
      hyprland-protocols
      libsForQt5.qt5.qtwayland
      rofimoji
-     #rofi-emoji
-     dunst				                             #notifications
+     dunst                                     #notifications
      jellyfin-ffmpeg                           #multimedia libs
      viewnior                                  #image viewr
      pavucontrol                               #Volume control
@@ -163,10 +174,37 @@ home.pointerCursor = {
      poweralertd
      dbus
      cudatoolkit
+     networkmanagerapplet
+     gparted
      ###apps###
      discord
+     obsidian
+     tailscale
+     syncthing
+     qsyncthingtray
+     htop
+     exiftool
+     cmatrix
+     evillimiter
+     walk
+     moonlight-qt
+     nvtopPackages.full
+     ###dev###
+     go
+     python3
+     nim
+     bun
+     pocketbase
+     edgedb
+     bruno
+     ripgrep
+     zip
      zed-editor
      android-studio
+     android-tools
+     jre17_minimal
+     ###nvim-Lua###
+     lua-language-server
   ];
 
   #Session variables
@@ -183,14 +221,16 @@ home.pointerCursor = {
 	     QT_QPA_PLATFORM = "wayland-egl";
 	     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
 	     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+       MOZ_DRM_DEVICE= "/dev/dri/card0:/dev/dri/card1";
 	     WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";
 	     #WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line
 	     GBM_BACKEND = "nvidia-drm";
 	     CLUTTER_BACKEND = "wayland";
-	     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
 	     LIBVA_DRIVER_NAME = "iHD";
 	     WLR_RENDERER = "vulkan";
-	     __NV_PRIME_RENDER_OFFLOAD="1";
+       VK_DRIVER_FILES="/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
+	     #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+	     #__NV_PRIME_RENDER_OFFLOAD="1";
 	     XDG_CURRENT_DESKTOP = "Hyprland";
 	     XDG_SESSION_DESKTOP = "Hyprland";
 	     XDG_SESSION_TYPE = "wayland";

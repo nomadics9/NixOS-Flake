@@ -42,18 +42,18 @@
 
 
   hardware = {
-  opengl.enable = true;
-  opengl.driSupport = true;
-  opengl.driSupport32Bit = true;
-   opengl = {
-      extraPackages = with pkgs; [
-        intel-media-driver # LIBVA_DRIVER_NAME=iHD
-        #vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-        #vaapiVdpau
-        #libvdpau-va-gl
-        #mesa.drivers
-      ];
-   };
+   graphics.enable = true;
+  # opengl.driSupport = true;
+   graphics.enable32Bit = true;
+     graphics = {
+        extraPackages = with pkgs; [
+          intel-media-driver # LIBVA_DRIVER_NAME=iHD
+  #        intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+  #        libvdpau-va-gl
+  #        vaapiVdpau
+  #        #mesa.drivers
+        ];
+     };
   
   nvidia.nvidiaSettings = true;
   nvidia.powerManagement.enable = true;
