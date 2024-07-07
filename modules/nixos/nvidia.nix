@@ -114,8 +114,8 @@
    hardware.nvidia-container-toolkit.enable = true;
    #systemd.enableUnifiedCgroupHierarchy = false;
 
-services.ollama = {
-  enable = true;
-  acceleration = "cuda";
-};
+#services.ollama = {
+#  enable = true;
+#  acceleration = "cuda";
+#};
 }

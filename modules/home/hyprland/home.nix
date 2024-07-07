@@ -143,11 +143,14 @@ home.pointerCursor = {
      jellyfin-ffmpeg                           #multimedia libs
      viewnior                                  #image viewr
      pavucontrol                               #Volume control
+     ###Gnome Stuff####
      gnome-text-editor
-     gnome.file-roller
-     gnome.gnome-font-viewer
-     gnome.gnome-calculator
-     gnome.nautilus                            #gnome file manager
+     file-roller
+     gnome-font-viewer
+     gnome-calculator
+     nautilus                            #gnome file manager
+     gnome-system-monitor
+     ########################33
      vlc                                       #Video player
      amberol                                   #Music player
      cava                                      #Sound Visualized
@@ -169,7 +172,6 @@ home.pointerCursor = {
      libcanberra-gtk3                          #notification sound
      #########System#########
      kitty
-     gnome.gnome-system-monitor
      libnotify
      poweralertd
      dbus
