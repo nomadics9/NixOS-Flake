@@ -2,6 +2,15 @@
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 
+   zed-fhs = pkgs.buildFHSUserEnv {
+     name = "zed";
+     targetPkgs = pkgs:
+       with pkgs; [
+         zed-editor
+       ];
+     runScript = "zed";
+   };
+
 in
 {
   imports = [
@@ -191,6 +200,7 @@ home.pointerCursor = {
      walk
      moonlight-qt
      nvtopPackages.full
+     valent
      ###dev###
      go
      python3
@@ -201,7 +211,7 @@ home.pointerCursor = {
      bruno
      ripgrep
      zip
-     zed-editor
+     zed-fhs
      android-studio
      android-tools
      jre17_minimal

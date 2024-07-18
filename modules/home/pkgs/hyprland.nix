@@ -244,7 +244,7 @@ bind = SUPER, T, togglefloating,
 $screenshotarea = hyprctl keyword animation "fadeOut,0,0,default"; grimshot --notify copy active; hyprctl keyword animation "fadeOut,1,4,default"
 bind = SUPER, S, exec, $screenshotarea
 #bind = SUPERSHIFT, S ,exec, grimshot --notify copy area
-bind=SUPERSHIFT,S,exec, grimshot savecopy area - | swappy -f -
+bind=SUPERSHIFT,S,exec, grimshot savecopy area - | swappy -o ~/Documents/screenshot.jpeg -f - 
 # Screen recorder
 bind = SUPERSHIFT, R, exec,wf-recorder & dunstify -a Recordering Started -i -u -A "^C ,stop" -t 0 -i ~/icons/rec-button.png 
 # Emoji selector 
