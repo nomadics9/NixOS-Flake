@@ -1,4 +1,15 @@
 # NixOS-Flake
+## New more robust config and config layout!
+https://github.com/nomadics9/nixcfg
+
+
+
+----------------------------
+
+### ⚠️ This repo wont be updated further and archived ⚠️
+new repo link above
+
+----------------------------
 My NixOS Flake + dotfiles
 
 NixOS with personal packages running on HyprlandWM + Waybar
